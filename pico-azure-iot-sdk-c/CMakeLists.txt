@@ -71,7 +71,7 @@ set(ENABLE_TESTING OFF CACHE BOOL "Build mbedtls testing")
 add_definitions(-DMBEDTLS_CONFIG_FILE="${PORT_DIR}/inc/mbedtls_config.h")
 add_subdirectory(${MBEDTLS_LIB_DIR})
 add_definitions(-DUSE_MQTT)
-#add_definitions(-DUSE_HTTP)
+add_definitions(-DUSE_HTTP)
 add_subdirectory(${PORT_DIR})
 
 # Add pico_stdlib library which aggregates commonly used features
