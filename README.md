@@ -11,7 +11,8 @@ App|Description
 ### 3rd party SDKs
 - [Azure IoT C SDKs and Libraries](https://github.com/Azure/azure-iot-sdk-c)
 - [Mbed TLS](https://github.com/ARMmbed/mbedtls)
-
+- [WIZnet ioLibrary](https://github.com/Wiznet/ioLibrary_Driver)
+  - for CMake users => https://github.com/Wiznet/RP2040-HAT-C/tree/main/libraries/ioLibrary_Driver
 ## Getting started
 
 See [Getting Started with the Raspberry Pi Pico](https://rptl.io/pico-get-started) and the README in the [pico-sdk](https://github.com/raspberrypi/pico-sdk) for information
@@ -25,6 +26,7 @@ This repo get the local copy version for this project.
 If you need, you can get this version from releae section in the git repo
 - Azure IoT C SDK 1.4.1 - https://github.com/Azure/azure-iot-sdk-c/releases/tag/1.4.1
 
+For Pico W5100S platform, we need to make port codes, please check out the [Microsoft Azure SDK porting guide document](https://github.com/Azure/azure-c-shared-utility/blob/master/devdoc/porting_guide.md). From this porting guide, make `\port` directory.
 
 #### Download mbedtls library
 This repo get the local copy version for this project.

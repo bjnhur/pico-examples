@@ -70,7 +70,7 @@ and removing calls to _DoWork will yield the same results. */
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
 
 /* Paste in the your iothub connection string  */
-// static const char* connectionString = "[device connection string]";
+static const char* connectionString = "[device connection string]";
 
 static const char* x509certificate =
 "-----BEGIN CERTIFICATE-----""\n"
