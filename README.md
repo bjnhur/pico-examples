@@ -56,11 +56,12 @@ If you need, you can get this version from release section in their git repo
 -------------
 ### Build project
 
-1. set the SDK path in CMakeLists.txt
-2. mkdir build
-3. cd build
-4. cmake .. -G "MSYS Makefiles"
-5. make & finish
+1. set the SDK, library path in CMakeLists.txt
+2. set the key string at application/sample_certs.c
+3. mkdir build
+4. cd build
+5. cmake .. -G "MSYS Makefiles"
+6. make & finish
 
 
 See the example command log
