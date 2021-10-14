@@ -34,23 +34,23 @@ This repo get the local copy version for this project.
 If you need, you can get this version from release section in their git repo
 - Mbed TLS 3.0.0 - https://github.com/ARMmbed/mbedtls/releases/tag/v3.0.0
 
-(MUST) Need to change 2 files.
+(MUST) Need to change 2 files. - temporary fix
 
 1. \mbedtls-3.0.0\include\mbedtls\ssl.h
 
-```
+```C
 // NOTICE! temporary solution for this project tlsio_mbedtls.c
-//    int MBEDTLS_PRIVATE(out_msgtype);            /*!< record header: message type      */
-    int out_msgtype;            /*!< record header: message type      */
+//  int MBEDTLS_PRIVATE(out_msgtype); /*!< record header: message type */
+  int out_msgtype;   /*!< record header: message type */
 
 ```
 
 2. \mbedtls-3.0.0\include\mbedtls\x509_crt.h
 
-```
+```C
 // NOTICE! temporary solution for this project tlsio_mbedtls.c
-//    int MBEDTLS_PRIVATE(version);                /**< The X.509 version. (1=v1, 2=v2, 3=v3) */
-    int version;                /**< The X.509 version. (1=v1, 2=v2, 3=v3) */
+//  int MBEDTLS_PRIVATE(version); /**< The X.509 version. (1=v1, 2=v2, 3=v3) */
+  int version;  /**< The X.509 version. (1=v1, 2=v2, 3=v3) */
 ```
 
 -------------
@@ -61,10 +61,12 @@ If you need, you can get this version from release section in their git repo
 3. mkdir build
 4. cd build
 5. cmake .. -G "MSYS Makefiles"
-6. make & finish
+6. cd pico-azure-iot-sdk-c
+7. make
+8. cp main.uf2 into your RP-Pico board
 
+#### Example command log
 
-See the example command log
 
 ```
 (PWD) pico-examples/build
@@ -167,6 +169,7 @@ $
 ![image](https://user-images.githubusercontent.com/6334864/137255335-1d866b48-c26f-4ac9-a6e4-1015f1e71fc5.png)
 
 
+-------
 ## Git tip!
 
 ### remove submodule
