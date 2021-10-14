@@ -51,9 +51,10 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+application
 build
 #azure-iot-sdk-c
 #azure-iot-sdk-c-1.4.1
 #mbedtls
 #mbedtls-3.0.0
-mbedtls-2.27.0
+#mbedtls-2.27.0
