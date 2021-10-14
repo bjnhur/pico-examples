@@ -18,6 +18,13 @@
 
 #include "azure_samples.h"
 
+// The application you wish to use should be uncommented
+//
+#define APP_TELEMETRY
+//#define APP_CLI_X509
+//#define APP_C2D
+//#define APP_PROV
+
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 /* SPI */
 #define SPI_PORT spi0
@@ -131,10 +138,18 @@ int main()
 // Select one application.
 //-----------------------------------------------------------------------------------
 
-    //iothub_ll_telemetry_sample();
-    //iothub_ll_c2d_sample();
-    //iothub_ll_client_x509_sample();
+#ifdef APP_TELEMETRY
+    iothub_ll_telemetry_sample();
+#endif // APP_TELEMETRY
+#ifdef APP_CLI_X509
+    iothub_ll_client_x509_sample();
+#endif // APP_CLI_X509
+#ifdef APP_C2D
+    iothub_ll_c2d_sample();
+#endif // APP_C2D
+#ifdef APP_PROV
     prov_dev_client_ll_sample();
+#endif // APP_PROV
 
 //-----------------------------------------------------------------------------------
 
