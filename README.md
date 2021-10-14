@@ -2,6 +2,8 @@
 
 RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azure IoT device client, ...
 
+[toc]
+
 ## Azure-IoT-SDK
 
 App|Description
@@ -26,7 +28,7 @@ This repo get the local copy version for this project.
 If you need, you can get this version from releae section in the git repo
 - Azure IoT C SDK 1.4.1 - https://github.com/Azure/azure-iot-sdk-c/releases/tag/1.4.1
 
-For Pico W5100S platform, we need to make port codes, please check out the [Microsoft Azure SDK porting guide document](https://github.com/Azure/azure-c-shared-utility/blob/master/devdoc/porting_guide.md). From this porting guide, make `\port` directory.
+For Pico W5100S platform, we need to make port codes, please check out the [Microsoft Azure SDK porting guide document](https://github.com/Azure/azure-c-shared-utility/blob/master/devdoc/porting_guide.md). From this porting guide, make `pico-azure-iot-sdk-c\port` directory.
 
 #### Download mbedtls library
 This repo get the local copy version for this project.
@@ -53,17 +55,89 @@ If you need, you can get this version from release section in their git repo
   int version;  /**< The X.509 version. (1=v1, 2=v2, 3=v3) */
 ```
 
--------------
+### Set the your env
+1. Set your board network information and select application
+
+> pico-azure-iot-sdk-c/application/main.c
+```C
+(...)
+
+// The application you wish to use should be uncommented
+//
+#define APP_TELEMETRY
+//#define APP_CLI_X509
+//#define APP_C2D
+//#define APP_PROV
+
+(...)
+
+static wiz_NetInfo g_net_info =
+    {
+        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x11}, // MAC address
+        .ip = {192, 168, 3, 111},                     // IP address
+        .sn = {255, 255, 255, 0},                    // Subnet Mask
+        .gw = {192, 168, 3, 1},                     // Gateway
+        .dns = {8, 8, 8, 8},                         // DNS server
+
+```
+2. set the SDK, library path as your env.
+
+> pico-azure-iot-sdk-c/CMakeLists.txt
+```bash
+
+if(NOT DEFINED MBEDTLS_LIB_DIR)
+#    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls)
+    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls-3.0.0)
+#    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls-2.27.0)
+    message(STATUS "MBEDTLS_LIB_DIR = ${MBEDTLS_LIB_DIR}")
+endif()
+if(NOT DEFINED AZURE_SDK_DIR)
+    set(AZURE_SDK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/azure-iot-sdk-c-1.4.1)
+    message(STATUS "AZURE_SDK_DIR = ${AZURE_SDK_DIR}")
+endif()
+if(NOT DEFINED PORT_DIR)
+    set(PORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/port)
+    message(STATUS "PORT_DIR = ${PORT_DIR}")
+endif()
+if(NOT DEFINED WIZNET_DIR)
+    set(WIZNET_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ioLibrary_Driver)
+    message(STATUS "WIZNET_DIR = ${WIZNET_DIR}")
+endif()
+```
+
+3. set the key information
+
+> pico-azure-iot-sdk-c/application/sample_certs.c
+
+```C
+/* Paste in the your iothub connection string  */
+const char pico_az_connectionString[] = "[device connection string]";
+const char pico_az_x509_connectionString[] = "[device connection string]";
+const char pico_az_x509certificate[] =
+"-----BEGIN CERTIFICATE-----""\n"
+"-----END CERTIFICATE-----";
+const char pico_az_x509privatekey[] =
+"-----BEGIN PRIVATE KEY-----""\n"
+"-----END PRIVATE KEY-----";
+const char pico_az_COMMON_NAME[] = "[custom-hsm-example]";
+const char pico_az_CERTIFICATE[] = 
+"-----BEGIN CERTIFICATE-----""\n"
+"-----END CERTIFICATE-----";
+const char pico_az_PRIVATE_KEY[] = 
+"-----BEGIN PRIVATE KEY-----""\n"
+"-----END PRIVATE KEY-----";
+```
+
+
 ### Build project
 
-1. set the SDK, library path in CMakeLists.txt
-2. set the key string at application/sample_certs.c
-3. mkdir build
-4. cd build
-5. cmake .. -G "MSYS Makefiles"
-6. cd pico-azure-iot-sdk-c
-7. make
-8. cp main.uf2 into your RP-Pico board
+1. set the key string at application/sample_certs.c
+2. mkdir build
+3. cd build
+4. cmake .. -G "MSYS Makefiles"
+5. cd pico-azure-iot-sdk-c
+6. make
+7. cp main.uf2 into your RP-Pico board
 
 #### Example command log
 
