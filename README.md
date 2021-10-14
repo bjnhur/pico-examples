@@ -11,6 +11,9 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
     - [2.1.2. Download mbedtls library](#212-download-mbedtls-library)
     - [2.1.3. Building mbedtls library](#213-building-mbedtls-library)
   - [2.2. Build a sample](#22-build-a-sample)
+    - [2.2.1. Modify CMakeLists.txt](#221-modify-cmakeliststxt)
+    - [2.2.2. Set your board network information and select application](#222-set-your-board-network-information-and-select-application)
+    - [2.2.3. Set the key information](#223-set-the-key-information)
   - [2.3. Build project](#23-build-project)
     - [2.3.1. Build command](#231-build-command)
     - [2.3.2. Example command log](#232-example-command-log)
@@ -78,7 +81,34 @@ In the following mbedtls source file, find the line similar to this and replace 
 ```
 
 ## 2.2. Build a sample
-1. Set your board network information and select application
+
+### 2.2.1. Modify CMakeLists.txt
+In the following "CMakeLists.txt" file, find the line similar to this and replace it as your environment:
+
+> pico-azure-iot-sdk-c/CMakeLists.txt
+```bash
+
+if(NOT DEFINED MBEDTLS_LIB_DIR)
+#    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls)
+    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls-3.0.0)
+#    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls-2.27.0)
+    message(STATUS "MBEDTLS_LIB_DIR = ${MBEDTLS_LIB_DIR}")
+endif()
+if(NOT DEFINED AZURE_SDK_DIR)
+    set(AZURE_SDK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/azure-iot-sdk-c-1.4.1)
+    message(STATUS "AZURE_SDK_DIR = ${AZURE_SDK_DIR}")
+endif()
+if(NOT DEFINED PORT_DIR)
+    set(PORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/port)
+    message(STATUS "PORT_DIR = ${PORT_DIR}")
+endif()
+if(NOT DEFINED WIZNET_DIR)
+    set(WIZNET_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ioLibrary_Driver)
+    message(STATUS "WIZNET_DIR = ${WIZNET_DIR}")
+endif()
+```
+
+### 2.2.2. Set your board network information and select application
 
 In the following main source file, find the line similar to this and replace it as follows:
 
@@ -105,34 +135,11 @@ static wiz_NetInfo g_net_info =
         .dns = {8, 8, 8, 8},                         // DNS server
 
 ```
-2. set the SDK, library path as your env.
 
-> pico-azure-iot-sdk-c/CMakeLists.txt
-```bash
+### 2.2.3. Set the key information
 
-if(NOT DEFINED MBEDTLS_LIB_DIR)
-#    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls)
-    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls-3.0.0)
-#    set(MBEDTLS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/mbedtls-2.27.0)
-    message(STATUS "MBEDTLS_LIB_DIR = ${MBEDTLS_LIB_DIR}")
-endif()
-if(NOT DEFINED AZURE_SDK_DIR)
-    set(AZURE_SDK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/azure-iot-sdk-c-1.4.1)
-    message(STATUS "AZURE_SDK_DIR = ${AZURE_SDK_DIR}")
-endif()
-if(NOT DEFINED PORT_DIR)
-    set(PORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/port)
-    message(STATUS "PORT_DIR = ${PORT_DIR}")
-endif()
-if(NOT DEFINED WIZNET_DIR)
-    set(WIZNET_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ioLibrary_Driver)
-    message(STATUS "WIZNET_DIR = ${WIZNET_DIR}")
-endif()
-```
+Edit the "sample_certs.c" file entering the proper connection string and key value from the Azure Portal:
 
-3. set the key information
-
-- Edit the sample file entering the proper connection string and key value from the Azure Portal:
 > pico-azure-iot-sdk-c/application/sample_certs.c
 
 ```C
