@@ -286,13 +286,7 @@ $ cp main.uf2 /f/
 ## 2.4. Sample result
 ### 2.4.1. "iothub_ll_telemetry_sample" application result
 
-> Screenshot of terminal window
-
-![image](https://user-images.githubusercontent.com/6334864/137256887-c3387b1f-19a7-4006-bb84-caeefd847b67.png)
-
-> Screenshot of "Azure IoT Explorer"
-
-![image](https://user-images.githubusercontent.com/6334864/137255335-1d866b48-c26f-4ac9-a6e4-1015f1e71fc5.png)
+👀 [Let's see this doc for iothub_ll_telemetry_sample application](APP_TELEMETRY_manual.md)
 
 # 3. Git tip!
 ## 3.1. remove submodule
