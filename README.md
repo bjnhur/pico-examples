@@ -162,6 +162,8 @@ $
 
 ### Sample result
 #### Screenshot of "Azure IoT Explorer"
+
+- "iothub_ll_telemetry_sample" application result image
 ![image](https://user-images.githubusercontent.com/6334864/137255335-1d866b48-c26f-4ac9-a6e4-1015f1e71fc5.png)
 
 
