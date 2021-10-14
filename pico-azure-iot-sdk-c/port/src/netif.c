@@ -19,8 +19,7 @@ static uint8_t g_ethernet_buf[1500] = {
 #define SOCKET_DNS 3
 static uint8_t dns_ip[4] = {8, 8, 8, 8};                         // DNS server
 
-static uint32_t current_timestamp;
-static uint8_t time_zone = 40; // Korea
+//static uint32_t current_timestamp;
 #define SNTP_SERVER_ADDRESS "pool.ntp.org"
 /* Timezone */
 #define TIMEZONE 40 // Korea
@@ -58,7 +57,6 @@ uint8_t wizchip_gethostbyname(const char* host, uint8_t* ip)
 void wizchip_sntp_init(void)
 {
     printf("Initializing SNTP\n");
-    uint8_t gettingip[4] = {0,};
     int rc = 0;
     rc = wizchip_gethostbyname(SNTP_SERVER_ADDRESS, g_sntp_server_ip);
     if (rc) {
@@ -86,7 +84,6 @@ void wizchip_sntp_init(void)
 time_t wizchip_sntp_get_current_timestamp(void)
 {
     uint32_t retval = 0;
-    uint32_t start_ms = 0;
     uint8_t loopcnt = 0;
     /* Get time */
     do {

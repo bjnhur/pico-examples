@@ -12,7 +12,6 @@
 #include "netif.h"
 
 static time_t now;
-static struct tm timeinfo;
 
 time_t sntp_get_current_timestamp()
 {

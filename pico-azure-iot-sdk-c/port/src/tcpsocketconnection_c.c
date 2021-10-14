@@ -141,9 +141,19 @@ int tcpsocketconnection_connect(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHa
 
 bool tcpsocketconnection_is_connected(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHandle)
 {
-  printf("=== tcpsocketconnection_is_connected ===\n");
+  printf("=== enter tcpsocketconnection_is_connected ===\n");
 	// TCPSocketConnection* tsc = (TCPSocketConnection*)tcpSocketConnectionHandle;
 	// return tsc->is_connected();
+  if (tcpSocketConnectionHandle != NULL)
+  {
+    uint8_t status = 0;
+    TCPSocketConnection* psock = (TCPSocketConnection*)tcpSocketConnectionHandle;
+    if ( getsockopt(psock->socket, SO_STATUS, &status) == SOCK_OK)
+    {
+      if ((status == SOCK_ESTABLISHED) || (status == SOCK_CLOSE_WAIT)) return true;
+    }
+  }
+  return false;
 }
 
 void tcpsocketconnection_close(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHandle)
@@ -191,9 +201,9 @@ int tcpsocketconnection_receive(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHa
     int recvsize = 0;
     int timeout = 0;
     while (1) {
-      int recvsize = getSn_RX_RSR(psock->socket);
-      if (recvsize > 0) return recv(psock->socket, data, length);
-      //  if (recvsize >= length) return recv(psock->socket, data, length);
+      recvsize = getSn_RX_RSR(psock->socket);
+      if (recvsize > 0) return recv(psock->socket, (uint8_t*)data, length);
+      //  if (recvsize >= length) return recv(psock->socket, (uint8_t*)data, length);
       sleep_ms(100);
       timeout++;
       if (timeout > 10) return 0;
@@ -213,7 +223,7 @@ int tcpsocketconnection_receive_all(TCPSOCKETCONNECTION_HANDLE tcpSocketConnecti
     printf("=== tcpsocketconnection_receive_all ===\n");
     TCPSocketConnection* psock = (TCPSocketConnection*)tcpSocketConnectionHandle;
     int recvsize = getSn_RX_RSR(psock->socket);
-    if (recvsize) return recv(psock->socket, data, length);
+    if (recvsize) return recv(psock->socket, (uint8_t*)data, length);
     else return 0;
   }
   else {

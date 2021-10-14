@@ -122,14 +122,12 @@ target_include_directories(AzureSDK PUBLIC
 "${AZURE_SDK_DIR}/provisioning_client/deps/utpm/inc"
 )
 
+add_definitions(-DUSE_MQTT)
+add_definitions(-DUSE_HTTP)
 add_definitions(-DDONT_USE_UPLOADTOBLOB)
-
 add_definitions(-DUSE_PROV_MODULE)
-
 #add_definitions(-DHSM_TYPE_SYMM_KEY)
 add_definitions(-DHSM_TYPE_X509)
-
-#add_definitions(-DHSM_TYPE_SAS_TOKEN)
 
 #add_definitions(-DUSE_BALTIMORE_CERT)
 #add_definitions(-DUSE_MICROSOFTAZURE_DE_CERT)
