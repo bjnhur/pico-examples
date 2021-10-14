@@ -1,5 +1,5 @@
 <!-- omit in toc -->
-# 1. Raspberry Pi Pico W5100 W5500 Network SDK Examples
+# Raspberry Pi Pico W5100 W5500 Network SDK Examples
 
 RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azure IoT device client, ...
 
@@ -156,6 +156,7 @@ const char pico_az_PRIVATE_KEY[] =
 
 ### 2.3.1. Example command log
 
+> on MSYS2 (MinGW64) + Windows 10 Platform
 
 ```
 (PWD) pico-examples/build
