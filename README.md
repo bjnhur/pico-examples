@@ -158,19 +158,21 @@ Scanning dependencies of target W5100S_FILES
 [100%] Built target main
 
 (PWD) pico-examples/build/pico-azure-iot-sdk-c
-$
+$ cp main.uf2 /f/
+
 
 ```
 
 ### Sample result
 
-#### Screenshot of terminal window
+#### "iothub_ll_telemetry_sample" application result
+
+> Screenshot of terminal window
 
 ![image](https://user-images.githubusercontent.com/6334864/137256887-c3387b1f-19a7-4006-bb84-caeefd847b67.png)
 
-#### Screenshot of "Azure IoT Explorer"
+> Screenshot of "Azure IoT Explorer"
 
-- "iothub_ll_telemetry_sample" application result image
 ![image](https://user-images.githubusercontent.com/6334864/137255335-1d866b48-c26f-4ac9-a6e4-1015f1e71fc5.png)
 
 
