@@ -1,42 +1,43 @@
-# Raspberry Pi Pico W5100 W5500 Network SDK Examples
+<!-- omit in toc -->
+# 1. Raspberry Pi Pico W5100 W5500 Network SDK Examples
 
 RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azure IoT device client, ...
 
-- [Raspberry Pi Pico W5100 W5500 Network SDK Examples](#raspberry-pi-pico-w5100-w5500-network-sdk-examples)
-  - [Azure-IoT-SDK](#azure-iot-sdk)
-    - [3rd party SDKs](#3rd-party-sdks)
-  - [Getting started](#getting-started)
-    - [Download SDK library](#download-sdk-library)
-      - [Download azure-iot-sdk-c library](#download-azure-iot-sdk-c-library)
-      - [Download mbedtls library](#download-mbedtls-library)
-    - [Set the your env](#set-the-your-env)
-    - [Build project](#build-project)
-      - [Example command log](#example-command-log)
-    - [Sample result](#sample-result)
-      - ["iothub_ll_telemetry_sample" application result](#iothub_ll_telemetry_sample-application-result)
-  - [Git tip!](#git-tip)
-    - [remove submodule](#remove-submodule)
-    - [git update all submodule](#git-update-all-submodule)
+- [1. Azure-IoT-SDK](#1-azure-iot-sdk)
+  - [1.1. 3rd party SDKs](#11-3rd-party-sdks)
+- [2. Getting started](#2-getting-started)
+  - [2.1. Download SDK library](#21-download-sdk-library)
+    - [2.1.1. Download azure-iot-sdk-c library](#211-download-azure-iot-sdk-c-library)
+    - [2.1.2. Download mbedtls library](#212-download-mbedtls-library)
+  - [2.2. Set the your env](#22-set-the-your-env)
+  - [2.3. Build project](#23-build-project)
+    - [2.3.1. Example command log](#231-example-command-log)
+  - [2.4. Sample result](#24-sample-result)
+    - [2.4.1. "iothub_ll_telemetry_sample" application result](#241-iothub_ll_telemetry_sample-application-result)
+- [3. Git tip!](#3-git-tip)
+  - [3.1. remove submodule](#31-remove-submodule)
+  - [3.2. git update all submodule](#32-git-update-all-submodule)
 
-## Azure-IoT-SDK
+# 1. Azure-IoT-SDK
 
 App|Description
 ---|---
 [Azure IoT SDK example](pico-azure-iot-sdk-c) | Basic Azure cloud functions with Azure IoT SDK. (NonOS + WIZnet W5100S)
 
-### 3rd party SDKs
+## 1.1. 3rd party SDKs
 - [Azure IoT C SDKs and Libraries](https://github.com/Azure/azure-iot-sdk-c)
 - [Mbed TLS](https://github.com/ARMmbed/mbedtls)
 - [WIZnet ioLibrary](https://github.com/Wiznet/ioLibrary_Driver)
   - for CMake users => https://github.com/Wiznet/RP2040-HAT-C/tree/main/libraries/ioLibrary_Driver
-## Getting started
+
+# 2. Getting started
 
 See [Getting Started with the Raspberry Pi Pico](https://rptl.io/pico-get-started) and the README in the [pico-sdk](https://github.com/raspberrypi/pico-sdk) for information
 on getting up and running.
 
-### Download SDK library 
+## 2.1. Download SDK library 
 
-#### Download azure-iot-sdk-c library
+### 2.1.1. Download azure-iot-sdk-c library
 This repo get the local copy version for this project.
 
 If you need, you can get this version from releae section in the git repo
@@ -44,7 +45,7 @@ If you need, you can get this version from releae section in the git repo
 
 For Pico W5100S platform, we need to make port codes, please check out the [Microsoft Azure SDK porting guide document](https://github.com/Azure/azure-c-shared-utility/blob/master/devdoc/porting_guide.md). From this porting guide, make `pico-azure-iot-sdk-c\port` directory.
 
-#### Download mbedtls library
+### 2.1.2. Download mbedtls library
 This repo get the local copy version for this project.
 
 If you need, you can get this version from release section in their git repo
@@ -69,7 +70,7 @@ If you need, you can get this version from release section in their git repo
   int version;  /**< The X.509 version. (1=v1, 2=v2, 3=v3) */
 ```
 
-### Set the your env
+## 2.2. Set the your env
 1. Set your board network information and select application
 
 > pico-azure-iot-sdk-c/application/main.c
@@ -143,7 +144,7 @@ const char pico_az_PRIVATE_KEY[] =
 ```
 
 
-### Build project
+## 2.3. Build project
 
 1. set the key string at application/sample_certs.c
 2. mkdir build
@@ -153,7 +154,7 @@ const char pico_az_PRIVATE_KEY[] =
 6. make
 7. cp main.uf2 into your RP-Pico board
 
-#### Example command log
+### 2.3.1. Example command log
 
 
 ```
@@ -251,9 +252,9 @@ $ cp main.uf2 /f/
 
 ```
 
-### Sample result
+## 2.4. Sample result
 
-#### "iothub_ll_telemetry_sample" application result
+### 2.4.1. "iothub_ll_telemetry_sample" application result
 
 > Screenshot of terminal window
 
@@ -265,9 +266,9 @@ $ cp main.uf2 /f/
 
 
 -------
-## Git tip!
+# 3. Git tip!
 
-### remove submodule
+## 3.1. remove submodule
 
 ```
 git submodule deinit <your_submodule> 
@@ -276,7 +277,7 @@ git commit-m "Removed submodule"
 rm -rf .git/modules/<your_submodule>
 
 ```
-### git update all submodule
+## 3.2. git update all submodule
 
 ```
 git submodule foreach 'git pull'
