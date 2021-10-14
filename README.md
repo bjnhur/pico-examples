@@ -163,6 +163,11 @@ $
 ```
 
 ### Sample result
+
+#### Screenshot of terminal window
+
+![image](https://user-images.githubusercontent.com/6334864/137256887-c3387b1f-19a7-4006-bb84-caeefd847b67.png)
+
 #### Screenshot of "Azure IoT Explorer"
 
 - "iothub_ll_telemetry_sample" application result image
