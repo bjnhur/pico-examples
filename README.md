@@ -19,6 +19,16 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
   - [3.1. remove submodule](#31-remove-submodule)
   - [3.2. git update all submodule](#32-git-update-all-submodule)
 
+    - [2.1.3. Building mbedtls library](#213-building-mbedtls-library)
+  - [2.2. Build a sample](#22-build-a-sample)
+  - [2.3. Build project](#23-build-project)
+    - [2.3.1. Example command log](#231-example-command-log)
+  - [2.4. Sample result](#24-sample-result)
+    - [2.4.1. "iothub_ll_telemetry_sample" application result](#241-iothub_ll_telemetry_sample-application-result)
+- [3. Git tip!](#3-git-tip)
+  - [3.1. remove submodule](#31-remove-submodule)
+  - [3.2. git update all submodule](#32-git-update-all-submodule)
+
 # 1. Azure-IoT-SDK
 
 App|Description
@@ -153,11 +163,26 @@ const char pico_az_PRIVATE_KEY[] =
 
 ## 2.3. Build project
 
-1. mkdir build
-2. cd build
-3. cmake .. -G "MSYS Makefiles"
-4. cd pico-azure-iot-sdk-c
-5. make
+- Run the following CMake commands from the root of the repository:
+
+```
+mkdir build
+cd build
+
+# As your environment, select 
+  cmake .. -G "MSYS Makefiles" ## on MSYS2 (MinGW64) + Windows 10 Platform
+# OR
+  cmake .. -G "Visual Studio 15 2017" ## For Visual Studio 2017
+# or
+  cmake .. -G "Visual Studio 16 2019" -A Win32
+# or
+  cmake ..
+  
+cd pico-azure-iot-sdk-c
+make
+
+```
+
 6. copy generated "main.uf2" file into your RP-Pico board
 
 ### 2.3.1. Example command log
