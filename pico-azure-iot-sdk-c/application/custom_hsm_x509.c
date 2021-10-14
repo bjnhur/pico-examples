@@ -6,18 +6,21 @@
 #include <stdint.h>
 
 #include "hsm_client_data.h"
-
+#include "azure_samples.h"
 
 // This sample is provided for sample only.  Please do not use this in production
 // For more information please see the devdoc using_custom_hsm.md
-static const char* const COMMON_NAME = "custom-hsm-example";
-static const char* const CERTIFICATE = "-----BEGIN CERTIFICATE-----""\n"
-"BASE64 Encoded certificate Here""\n"
-"-----END CERTIFICATE-----";
+// static const char* const COMMON_NAME = "custom-hsm-example";
+// static const char* const CERTIFICATE = "-----BEGIN CERTIFICATE-----""\n"
+// "BASE64 Encoded certificate Here""\n"
+// "-----END CERTIFICATE-----";
+// static const char* const PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----""\n"
+// "BASE64 Encoded certificate Here""\n"
+// "-----END PRIVATE KEY-----";
 
-static const char* const PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----""\n"
-"BASE64 Encoded certificate Here""\n"
-"-----END PRIVATE KEY-----";
+static const char* COMMON_NAME = pico_az_COMMON_NAME;
+static const char* CERTIFICATE = pico_az_CERTIFICATE;
+static const char* PRIVATE_KEY = pico_az_PRIVATE_KEY;
 
 // Provided for sample only
 static const char* const SYMMETRIC_KEY = "Symmetric Key value";

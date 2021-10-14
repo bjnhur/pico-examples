@@ -59,7 +59,9 @@ and removing calls to _DoWork will yield the same results. */
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
 
 /* Paste in the your iothub connection string  */
-static const char* connectionString = "[device connection string]";
+//static const char* connectionString = "[device connection string]";
+static const char* connectionString = pico_az_connectionString;
+
 
 #define MESSAGE_COUNT        3
 static bool g_continueRunning = true;

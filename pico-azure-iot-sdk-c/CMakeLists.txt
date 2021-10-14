@@ -29,6 +29,8 @@ application/iothub_ll_c2d_sample.c
 application/iothub_ll_client_x509_sample.c
 application/prov_dev_client_ll_sample.c
 application/custom_hsm_x509.c
+application/sample_certs.c
+#application/real_certs.c
 )
 #set(main_files ${iothub_c_files} ${PROJECT_SOURCE_DIR}/certs/certs.c)
 add_executable(main ${main_files})
