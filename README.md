@@ -9,7 +9,8 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
   - [2.1. Download SDK library](#21-download-sdk-library)
     - [2.1.1. Download azure-iot-sdk-c library](#211-download-azure-iot-sdk-c-library)
     - [2.1.2. Download mbedtls library](#212-download-mbedtls-library)
-  - [2.2. Set the your env](#22-set-the-your-env)
+    - [2.1.3. Building mbedtls library](#213-building-mbedtls-library)
+  - [2.2. Build a sample](#22-build-a-sample)
   - [2.3. Build project](#23-build-project)
     - [2.3.1. Example command log](#231-example-command-log)
   - [2.4. Sample result](#24-sample-result)
@@ -51,7 +52,10 @@ This repo get the local copy version for this project.
 If you need, you can get this version from release section in their git repo
 - Mbed TLS 3.0.0 - https://github.com/ARMmbed/mbedtls/releases/tag/v3.0.0
 
-(MUST) Need to change 2 files. - temporary fix
+### 2.1.3. Building mbedtls library
+
+For this project, (MUST) Need to change 2 files. - temporary fix
+In the following mbedtls source file, find the line similar to this and replace it as follows:
 
 1. \mbedtls-3.0.0\include\mbedtls\ssl.h
 
@@ -70,9 +74,11 @@ If you need, you can get this version from release section in their git repo
   int version;  /**< The X.509 version. (1=v1, 2=v2, 3=v3) */
 ```
 
-## 2.2. Set the your env
+## 2.2. Build a sample
 1. Set your board network information and select application
 
+In the following main source file, find the line similar to this and replace it as follows:
+- 
 > pico-azure-iot-sdk-c/application/main.c
 ```C
 (...)
@@ -122,6 +128,7 @@ endif()
 
 3. set the key information
 
+- Edit the sample file entering the proper connection string and key value from the Azure Portal:
 > pico-azure-iot-sdk-c/application/sample_certs.c
 
 ```C
@@ -146,13 +153,12 @@ const char pico_az_PRIVATE_KEY[] =
 
 ## 2.3. Build project
 
-1. set the key string at application/sample_certs.c
-2. mkdir build
-3. cd build
-4. cmake .. -G "MSYS Makefiles"
-5. cd pico-azure-iot-sdk-c
-6. make
-7. cp main.uf2 into your RP-Pico board
+1. mkdir build
+2. cd build
+3. cmake .. -G "MSYS Makefiles"
+4. cd pico-azure-iot-sdk-c
+5. make
+6. copy generated "main.uf2" file into your RP-Pico board
 
 ### 2.3.1. Example command log
 
