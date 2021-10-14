@@ -160,6 +160,11 @@ $
 
 ```
 
+### Sample result
+#### Screenshot of "Azure IoT Explorer"
+![image](https://user-images.githubusercontent.com/6334864/137255335-1d866b48-c26f-4ac9-a6e4-1015f1e71fc5.png)
+
+
 ## Git tip!
 
 ### remove submodule
