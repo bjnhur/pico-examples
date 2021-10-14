@@ -12,22 +12,15 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
     - [2.1.3. Building mbedtls library](#213-building-mbedtls-library)
   - [2.2. Build a sample](#22-build-a-sample)
   - [2.3. Build project](#23-build-project)
-    - [2.3.1. Example command log](#231-example-command-log)
+    - [2.3.1. Build command](#231-build-command)
+    - [2.3.2. Example command log](#232-example-command-log)
   - [2.4. Sample result](#24-sample-result)
     - [2.4.1. "iothub_ll_telemetry_sample" application result](#241-iothub_ll_telemetry_sample-application-result)
 - [3. Git tip!](#3-git-tip)
   - [3.1. remove submodule](#31-remove-submodule)
   - [3.2. git update all submodule](#32-git-update-all-submodule)
 
-    - [2.1.3. Building mbedtls library](#213-building-mbedtls-library)
-  - [2.2. Build a sample](#22-build-a-sample)
-  - [2.3. Build project](#23-build-project)
-    - [2.3.1. Example command log](#231-example-command-log)
-  - [2.4. Sample result](#24-sample-result)
-    - [2.4.1. "iothub_ll_telemetry_sample" application result](#241-iothub_ll_telemetry_sample-application-result)
-- [3. Git tip!](#3-git-tip)
-  - [3.1. remove submodule](#31-remove-submodule)
-  - [3.2. git update all submodule](#32-git-update-all-submodule)
+------
 
 # 1. Azure-IoT-SDK
 
@@ -88,8 +81,9 @@ In the following mbedtls source file, find the line similar to this and replace 
 1. Set your board network information and select application
 
 In the following main source file, find the line similar to this and replace it as follows:
-- 
+
 > pico-azure-iot-sdk-c/application/main.c
+
 ```C
 (...)
 
@@ -160,10 +154,10 @@ const char pico_az_PRIVATE_KEY[] =
 "-----END PRIVATE KEY-----";
 ```
 
-
 ## 2.3. Build project
 
-- Run the following CMake commands from the root of the repository:
+### 2.3.1. Build command
+Run the following CMake commands from the root of the repository:
 
 ```
 mkdir build
@@ -182,10 +176,9 @@ cd pico-azure-iot-sdk-c
 make
 
 ```
+Then, copy generated "main.uf2" file into your RP-Pico board. Done!!
 
-6. copy generated "main.uf2" file into your RP-Pico board
-
-### 2.3.1. Example command log
+### 2.3.2. Example command log
 
 > on MSYS2 (MinGW64) + Windows 10 Platform
 
@@ -281,11 +274,9 @@ Scanning dependencies of target W5100S_FILES
 (PWD) pico-examples/build/pico-azure-iot-sdk-c
 $ cp main.uf2 /f/
 
-
 ```
 
 ## 2.4. Sample result
-
 ### 2.4.1. "iothub_ll_telemetry_sample" application result
 
 > Screenshot of terminal window
@@ -296,10 +287,7 @@ $ cp main.uf2 /f/
 
 ![image](https://user-images.githubusercontent.com/6334864/137255335-1d866b48-c26f-4ac9-a6e4-1015f1e71fc5.png)
 
-
--------
 # 3. Git tip!
-
 ## 3.1. remove submodule
 
 ```
