@@ -1,7 +1,17 @@
-# Prepare IoT Hub and Device for this example
-## Developer PC
+- [1. Prepare IoT Hub and Device for this example](#1-prepare-iot-hub-and-device-for-this-example)
+  - [1.1. Developer PC - Generate Device self-signed certificates](#11-developer-pc---generate-device-self-signed-certificates)
+  - [1.2. Developer PC - SDK setting](#12-developer-pc---sdk-setting)
+  - [1.3. Developer PC - Build](#13-developer-pc---build)
+  - [1.4. Developer PC - Serial terminal open](#14-developer-pc---serial-terminal-open)
+  - [1.5. Azure portal](#15-azure-portal)
+  - [1.6. Developer PC - Azure IoT Explorer (preview) setting](#16-developer-pc---azure-iot-explorer-preview-setting)
+- [2. Run the example code](#2-run-the-example-code)
+  - [2.1. copy main.uf2 file into your Pico board](#21-copy-mainuf2-file-into-your-pico-board)
+  - [2.2. Serial terminal log](#22-serial-terminal-log)
+  - [2.3. Azure IoT Explorer (preview) log](#23-azure-iot-explorer-preview-log)
+# 1. Prepare IoT Hub and Device for this example
+## 1.1. Developer PC - Generate Device self-signed certificates
 
-### Generate Device self-signed certificates
 **[MUST]** Please follow up [tutorial-x509-self-sign](https://docs.microsoft.com/en-us/azure/iot-hub/tutorial-x509-self-sign)
 
 For your reference, prepare example log as below:
@@ -122,7 +132,7 @@ $
 - Select the X.509 Self-Signed authentication type.
 - Paste the hex string thumbprints that you copied from your device primary and secondary certificates. Make sure that the hex strings have no colon delimiters.
 
-### SDK setting
+## 1.2. Developer PC - SDK setting
 
 - Get the key value from files _(device1.crt, device1.key)_ as below:
 ![image](https://user-images.githubusercontent.com/6334864/137420283-440321ad-6656-4cff-9153-a26188df6d2c.png)
@@ -136,32 +146,32 @@ $
 > ./pico-azure-iot-sdk-c/application/main.c
 ![image](https://user-images.githubusercontent.com/6334864/137421611-ddf540ee-e699-42c3-a229-9265088e73f5.png)
 
-### Azure IoT Explorer (preview) setting
-![image](https://user-images.githubusercontent.com/6334864/137422040-1f15781b-69a3-4c23-a92e-adfc452acd01.png)
-![image](https://user-images.githubusercontent.com/6334864/137422225-4d735152-e220-4801-918e-12532ef9fd4a.png)
-![image](https://user-images.githubusercontent.com/6334864/137422316-7b5916d3-1851-4344-9776-b6ce193e0089.png)
-
-### Build
+## 1.3. Developer PC - Build
 
 ![image](https://user-images.githubusercontent.com/6334864/137421861-ada5ee2d-c153-4d75-bfb2-b8641f4d4919.png)
 
-### Serial terminal open
+## 1.4. Developer PC - Serial terminal open
 ![image](https://user-images.githubusercontent.com/6334864/137317966-b9f63168-e011-4a0a-a3b1-345d1e847304.png)
 
-## Azure portal 
+## 1.5. Azure portal 
 ![image](https://user-images.githubusercontent.com/6334864/137417701-28ded168-7bdd-4e9c-a89d-d4cc7304440c.png)
 ![image](https://user-images.githubusercontent.com/6334864/137418264-3ec14375-a3ea-40f4-9dc6-8292e2966a76.png)
 ![image](https://user-images.githubusercontent.com/6334864/137418465-485410ed-6c9f-4744-853a-ed42818c2772.png)
 ![image](https://user-images.githubusercontent.com/6334864/137418475-4b487e14-15b7-4bb8-913c-ab9009eaf6a3.png)
 
-# Run the example code
+## 1.6. Developer PC - Azure IoT Explorer (preview) setting
+![image](https://user-images.githubusercontent.com/6334864/137422040-1f15781b-69a3-4c23-a92e-adfc452acd01.png)
+![image](https://user-images.githubusercontent.com/6334864/137422225-4d735152-e220-4801-918e-12532ef9fd4a.png)
+![image](https://user-images.githubusercontent.com/6334864/137422316-7b5916d3-1851-4344-9776-b6ce193e0089.png)
 
-## copy main.uf2 file into your Pico board
+# 2. Run the example code
+
+## 2.1. copy main.uf2 file into your Pico board
 ![image](https://user-images.githubusercontent.com/6334864/137318763-14d23305-af22-45d1-ab43-4143b50b658c.png)
 
-## Serial terminal log
+## 2.2. Serial terminal log
 ![image](https://user-images.githubusercontent.com/6334864/137422831-f77bee77-d372-44d4-ac81-8b798710be28.png)
 ![image](https://user-images.githubusercontent.com/6334864/137422966-984ffb83-e579-44e0-911e-7f45572afec8.png)
 
-## Azure IoT Explorer (preview) log
+## 2.3. Azure IoT Explorer (preview) log
 ![image](https://user-images.githubusercontent.com/6334864/137423061-fbb80b7f-9d27-49a9-bff2-b1377ac3ac39.png)
