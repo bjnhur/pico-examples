@@ -21,6 +21,7 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
     - [2.4.1. 📬 "iothub_ll_telemetry_sample" application result](#241--iothub_ll_telemetry_sample-application-result)
     - [2.4.2. 📩 "iothub_ll_c2d_sample" application result](#242--iothub_ll_c2d_sample-application-result)
     - [2.4.3. 🔐 "iothub_ll_client_x509_sample" application result](#243--iothub_ll_client_x509_sample-application-result)
+    - [2.4.3. 🚢 "prov_dev_client_ll_sample" application result](#243--prov_dev_client_ll_sample-application-result)
 
 ------
 
@@ -294,3 +295,7 @@ $ cp main.uf2 /f/
 ### 2.4.3. 🔐 "iothub_ll_client_x509_sample" application result
 
 📑 [Let's see this doc for iothub_ll_client_x509_sample application](_3_APP_CLIENT_X509_manual.md)
+
+### 2.4.3. 🚢 "prov_dev_client_ll_sample" application result
+
+📑 [Let's see this doc for prov_dev_client_ll_sample application](_4_APP_PROV_X509_manual.md)
