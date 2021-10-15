@@ -286,7 +286,7 @@ $ cp main.uf2 /f/
 ## 2.4. Sample result
 ### 2.4.1. "iothub_ll_telemetry_sample" application result
 
-👀 [Let's see this doc for iothub_ll_telemetry_sample application](APP_TELEMETRY_manual.md)
+👀 [Let's see this doc for iothub_ll_telemetry_sample application](_1_APP_TELEMETRY_manual.md)
 
 # 3. Git tip!
 ## 3.1. remove submodule
