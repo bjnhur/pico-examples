@@ -19,6 +19,7 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
     - [2.3.2. Example command log](#232-example-command-log)
   - [2.4. Sample result](#24-sample-result)
     - [2.4.1. "iothub_ll_telemetry_sample" application result](#241-iothub_ll_telemetry_sample-application-result)
+    - [2.4.2. "iothub_ll_c2d_sample" application result](#242-iothub_ll_c2d_sample-application-result)
 - [3. Git tip!](#3-git-tip)
   - [3.1. remove submodule](#31-remove-submodule)
   - [3.2. git update all submodule](#32-git-update-all-submodule)
@@ -287,6 +288,10 @@ $ cp main.uf2 /f/
 ### 2.4.1. "iothub_ll_telemetry_sample" application result
 
 👀 [Let's see this doc for iothub_ll_telemetry_sample application](_1_APP_TELEMETRY_manual.md)
+
+### 2.4.2. "iothub_ll_c2d_sample" application result
+
+📩 [Let's see this doc for iothub_ll_c2d_sample application](_2_APP_C2D_manual.md)
 
 # 3. Git tip!
 ## 3.1. remove submodule
