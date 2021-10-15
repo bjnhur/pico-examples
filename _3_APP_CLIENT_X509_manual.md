@@ -1,3 +1,6 @@
+<!-- omit in toc -->
+# iothub_ll_client_x509_sample application
+
 - [1. Prepare IoT Hub and Device for this example](#1-prepare-iot-hub-and-device-for-this-example)
   - [1.1. Developer PC - Generate Device self-signed certificates](#11-developer-pc---generate-device-self-signed-certificates)
   - [1.2. Developer PC - SDK setting](#12-developer-pc---sdk-setting)
