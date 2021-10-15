@@ -54,6 +54,7 @@ dkms.conf
 #application
 build
 log
+certi
 #azure-iot-sdk-c
 #azure-iot-sdk-c-1.4.1
 #mbedtls
