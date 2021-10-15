@@ -18,11 +18,9 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
     - [2.3.1. Build command](#231-build-command)
     - [2.3.2. Example command log](#232-example-command-log)
   - [2.4. Sample result](#24-sample-result)
-    - [2.4.1. "iothub_ll_telemetry_sample" application result](#241-iothub_ll_telemetry_sample-application-result)
-    - [2.4.2. "iothub_ll_c2d_sample" application result](#242-iothub_ll_c2d_sample-application-result)
-- [3. Git tip!](#3-git-tip)
-  - [3.1. remove submodule](#31-remove-submodule)
-  - [3.2. git update all submodule](#32-git-update-all-submodule)
+    - [2.4.1. 📬 "iothub_ll_telemetry_sample" application result](#241--iothub_ll_telemetry_sample-application-result)
+    - [2.4.2. 📩 "iothub_ll_c2d_sample" application result](#242--iothub_ll_c2d_sample-application-result)
+    - [2.4.3. 🔐 "iothub_ll_client_x509_sample" application result](#243--iothub_ll_client_x509_sample-application-result)
 
 ------
 
@@ -285,27 +283,14 @@ $ cp main.uf2 /f/
 ```
 
 ## 2.4. Sample result
-### 2.4.1. "iothub_ll_telemetry_sample" application result
+### 2.4.1. 📬 "iothub_ll_telemetry_sample" application result
 
-👀 [Let's see this doc for iothub_ll_telemetry_sample application](_1_APP_TELEMETRY_manual.md)
+📑 [Let's see this doc for iothub_ll_telemetry_sample application](_1_APP_TELEMETRY_manual.md)
 
-### 2.4.2. "iothub_ll_c2d_sample" application result
+### 2.4.2. 📩 "iothub_ll_c2d_sample" application result
 
-📩 [Let's see this doc for iothub_ll_c2d_sample application](_2_APP_C2D_manual.md)
+📑 [Let's see this doc for iothub_ll_c2d_sample application](_2_APP_C2D_manual.md)
 
-# 3. Git tip!
-## 3.1. remove submodule
+### 2.4.3. 🔐 "iothub_ll_client_x509_sample" application result
 
-```
-git submodule deinit <your_submodule> 
-git rm <your_submodule> 
-git commit-m "Removed submodule" 
-rm -rf .git/modules/<your_submodule>
-
-```
-## 3.2. git update all submodule
-
-```
-git submodule foreach 'git pull'
-
-```
+📑 [Let's see this doc for iothub_ll_client_x509_sample application](_3_APP_CLIENT_X509_manual.md)
