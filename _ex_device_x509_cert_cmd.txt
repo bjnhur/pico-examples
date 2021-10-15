@@ -1,0 +1,5 @@
+openssl genpkey -out device1.key -algorithm RSA -pkeyopt 
+openssl req -new -key device1.key -out device1.csr
+openssl x509 -req -days 365 -in device1.csr -signkey device1.key -out device1.crt
+openssl x509 -in device1.crt -out device1.pem -outform PEM
+openssl x509 -in device1.crt -noout -fingerprint
