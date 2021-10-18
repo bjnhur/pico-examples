@@ -103,8 +103,10 @@ void DHCP_time_handler(void);
  * @param ip_assign   - callback func when IP is assigned from DHCP server first
  * @param ip_update   - callback func when IP is changed
  * @param ip_conflict - callback func when the assigned IP is conflict with others.
+ * @param expire_lease_time - callback func when lease time expire.
  */
-void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void));
+//void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void));
+void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void), void(*expire_lease_time)(void));
 
 /*
  * @brief DHCP client in the main loop
@@ -120,6 +122,7 @@ void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_co
  */ 
 uint8_t DHCP_run(void);
 
+void DHCP_socket_close(void);
 /*
  * @brief Stop DHCP processing
  * @note If you want to restart. call DHCP_init() and DHCP_run()

@@ -23,7 +23,7 @@
 //#define APP_TELEMETRY
 //#define APP_C2D
 //#define APP_CLI_X509
-#define APP_PROV_X509
+//#define APP_PROV_X509
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 /* SPI */
@@ -34,20 +34,11 @@ const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 #define PIN_CS 17
 #define PIN_RST 20
 
+// The application you wish to use DHCP mode should be uncommented
+#define _DHCP
+
 /* Critical section */
 static critical_section_t g_wizchip_cri_sec;
-/* Network */
-static wiz_NetInfo g_net_info =
-    {
-        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x11}, // MAC address
-        .ip = {192, 168, 3, 111},                     // IP address
-        .sn = {255, 255, 255, 0},                    // Subnet Mask
-        .gw = {192, 168, 3, 1},                     // Gateway
-        .dns = {8, 8, 8, 8},                         // DNS server
-        // this example uses static IP
-        // .dhcp = NETINFO_DHCP                         // DHCP enable/disable
-        .dhcp = NETINFO_STATIC
-};
 
 /* Timer */
 static struct repeating_timer g_timer;
@@ -66,10 +57,6 @@ static void wizchip_critical_section_lock(void);
 static void wizchip_critical_section_unlock(void);
 static void wizchip_initialize(void);
 static void wizchip_check(void);
-
-/* Network */
-static void network_initialize(void);
-static void print_network_information(void);
 
 /* Timer */
 static bool repeating_timer_callback(struct repeating_timer *t);
@@ -124,13 +111,19 @@ int main()
     wizchip_initialize();
     wizchip_check();
 
+    int8_t networkip_setting = 0;
+#ifdef _DHCP
+    // this example uses DHCP
+    networkip_setting = wizchip_network_initialize(true);
+#else
     // this example uses static IP
-    network_initialize();
-    print_network_information();
+    networkip_setting = wizchip_network_initialize(false);
+#endif
 
     add_repeating_timer_ms(-1000, repeating_timer_callback, NULL, &g_timer);
     // bool cancelled = cancel_repeating_timer(&timer);
     // printf("cancelled... %d\n", cancelled);
+    if (networkip_setting) {
 //-----------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------
@@ -139,19 +132,21 @@ int main()
 //-----------------------------------------------------------------------------------
 
 #ifdef APP_TELEMETRY
-    iothub_ll_telemetry_sample();
+        iothub_ll_telemetry_sample();
 #endif // APP_TELEMETRY
 #ifdef APP_C2D
-    iothub_ll_c2d_sample();
+        iothub_ll_c2d_sample();
 #endif // APP_C2D
 #ifdef APP_CLI_X509
-    iothub_ll_client_x509_sample();
+        iothub_ll_client_x509_sample();
 #endif // APP_CLI_X509
 #ifdef APP_PROV_X509
-    prov_dev_client_ll_sample();
+        prov_dev_client_ll_sample();
 #endif // APP_PROV_X509
-
+    ;
 //-----------------------------------------------------------------------------------
+    }
+    else printf("Check your network setting.\n");
 
     /* Infinite loop */
     for( ;; )
@@ -251,43 +246,13 @@ static void wizchip_check(void)
     }
 }
 
-/* Network */
-static void network_initialize(void)
-{
-    ctlnetwork(CN_SET_NETINFO, (void *)&g_net_info);
-}
-
-static void print_network_information(void)
-{
-    uint8_t tmp_str[8] = {
-        0,
-    };
-
-    ctlnetwork(CN_GET_NETINFO, (void *)&g_net_info);
-    ctlwizchip(CW_GET_ID, (void *)tmp_str);
-
-    printf("=========================================\n");
-    if (g_net_info.dhcp == NETINFO_DHCP)
-    {
-        printf(" %s network configuration : DHCP\n\n", (char *)tmp_str);
-    }
-    else
-    {
-        printf(" %s network configuration : static\n\n", (char *)tmp_str);
-    }
-    printf(" MAC         : %02X:%02X:%02X:%02X:%02X:%02X\n", g_net_info.mac[0], g_net_info.mac[1], g_net_info.mac[2], g_net_info.mac[3], g_net_info.mac[4], g_net_info.mac[5]);
-    printf(" IP          : %d.%d.%d.%d\n", g_net_info.ip[0], g_net_info.ip[1], g_net_info.ip[2], g_net_info.ip[3]);
-    printf(" Subnet Mask : %d.%d.%d.%d\n", g_net_info.sn[0], g_net_info.sn[1], g_net_info.sn[2], g_net_info.sn[3]);
-    printf(" Gateway     : %d.%d.%d.%d\n", g_net_info.gw[0], g_net_info.gw[1], g_net_info.gw[2], g_net_info.gw[3]);
-    printf(" DNS         : %d.%d.%d.%d\n", g_net_info.dns[0], g_net_info.dns[1], g_net_info.dns[2], g_net_info.dns[3]);
-    printf("=========================================\n\n");
-}
-
 /* Timer */
 static bool repeating_timer_callback(struct repeating_timer *t)
 {
-    // printf("Repeat at %lld\n", time_us_64());
+    //printf("Repeat at %lld\n", time_us_64());
     g_sec_cnt++;
-    // DHCP_time_handler();
+#ifdef _DHCP
+    wizchip_dhcp_time_handler();
+#endif
     return true;
 }

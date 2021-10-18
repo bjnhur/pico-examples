@@ -10,3 +10,6 @@
 uint8_t wizchip_gethostbyname(const char* host, uint8_t* ip);
 void wizchip_sntp_init();
 time_t wizchip_sntp_get_current_timestamp();
+
+int8_t wizchip_network_initialize(bool bDHCP);
+void wizchip_dhcp_time_handler(void);
