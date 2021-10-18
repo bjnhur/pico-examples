@@ -48,7 +48,10 @@ on getting up and running.
 This repo get the local copy version for this project.
 
 If you need, you can get this version from releae section in the git repo
+- Recent release : https://github.com/Azure/azure-iot-sdk-c/releases/tag/LTS_07_2021_Ref01
 - Azure IoT C SDK 1.4.1 - https://github.com/Azure/azure-iot-sdk-c/releases/tag/1.4.1
+
+📑 For details, Please read [_0_install_Azure_IoT_SDK.md](_0_install_Azure_IoT_SDK.md)
 
 For Pico W5100S platform, we need to make port codes, please check out the [Microsoft Azure SDK porting guide document](https://github.com/Azure/azure-c-shared-utility/blob/master/devdoc/porting_guide.md). From this porting guide, make `pico-azure-iot-sdk-c\port` directory.
 

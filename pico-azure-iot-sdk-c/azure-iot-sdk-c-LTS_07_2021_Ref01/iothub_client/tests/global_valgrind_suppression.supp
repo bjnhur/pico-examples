@@ -1,0 +1,303 @@
+{
+    CRYPTO_malloc allow customization race in OpenSSL
+    Helgrind:Race
+    obj:/*lib*/libcrypto*
+}
+{
+    DRD CRYPTO_malloc allow customization race in OpenSSL
+    drd:ConflictingAccess
+    obj:/*lib*/libcrypto*
+}
+{
+    SHA256 has unprotected global access
+    Helgrind:Race
+    fun:SHA256Input
+}
+{
+    DRD SHA256 has unprotected global access
+    drd:ConflictingAccess
+    fun:SHA256Input
+}
+{
+    DRD Conflicting store by thread in printf
+    drd:ConflictingAccess
+    fun:__GI_mempcpy
+    fun:_IO_file_xsputn@@GLIBC_2.2.5
+    fun:vfprintf
+}
+{
+    DRD Conflicting store by thread in sprintf
+    drd:ConflictingAccess
+    ...
+    fun:sprintf
+    fun:EventData_Create
+}
+{
+    Race conflicting store by thread in EventData_Create/sprintf    
+    Helgrind:Race 
+    ...
+    fun:sprintf
+    fun:EventData_Create
+}
+{
+   DRD Conflicting store by thread in printf2
+   drd:ConflictingAccess
+   fun:__GI_mempcpy
+   fun:_IO_default_xsputn
+   fun:_IO_file_xsputn@@GLIBC_2.2.5
+   fun:vfprintf
+}
+{
+    DRD Conflicting store by thread in puts
+    drd:ConflictingAccess
+    fun:__GI_mempcpy
+    fun:_IO_file_xsputn@@GLIBC_2.2.5
+    fun:puts
+}
+{
+    DRD Conflicting store by thread in console_log
+    drd:ConflictingAccess
+    ...
+    fun:consolelogger_log
+}
+{
+    Race conflicting store by thread in console_log
+    Helgrind:Race
+    ...
+    fun:consolelogger_log
+}
+{
+    HTTPAPI has unprotected global access
+    Helgrind:Race
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.4.0
+    ...
+}
+{
+    HTTPAPI has unprotected global access
+    Helgrind:Race
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.5.0
+    ...
+}
+{
+    HTTPAPI has unprotected global access
+    Helgrind:Race
+    ...
+    fun:HTTPAPIEX_Destroy
+    ...
+}
+{
+    HTTPAPI has unprotected global access
+    Helgrind:Race
+    ...
+    fun:IoTHubClientCore_UploadToBlobAsync
+    ...
+}
+{
+    HTTPAPI has unprotected global access
+    Helgrind:Race
+    ...
+    fun:IoTHubClientCore_LL_UploadToBlob
+    ...
+}
+{
+    DRD HTTPAPI has unprotected global access
+    drd:ConflictingAccess
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.4.0
+    ...
+}
+{
+    DRD HTTPAPI has unprotected global access
+    drd:ConflictingAccess
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.5.0
+    ...
+}
+{
+    DRD HTTPAPI has unprotected global access
+    drd:ConflictingAccess
+    ...
+    fun:HTTPAPIEX_Destroy
+    ...
+}
+{
+    DRD HTTPAPI has unprotected global access
+    drd:ConflictingAccess
+    ...
+    fun:IoTHubClientCore_LL_UploadToBlob
+    ...
+}
+
+{
+   DRD false conflicting access while setting time basis
+   drd:ConflictingAccess
+   fun:set_time_basis
+}
+{
+   DRD false conflicting access while setting time basis
+   drd:ConflictingAccess
+   fun:get_time_ns
+}
+{
+   Helgrind false race confition while setting time basis
+   Helgrind:Race
+   fun:set_time_basis
+}
+{
+   Helgrind false race confition while setting time basis
+   Helgrind:Race
+   fun:get_time_ns
+}
+{
+   OpenSSL/libp11-0.4.11
+   drd:MutexErr
+   fun:pthread_mutex_destroy
+   obj:/usr/lib/x86_64-linux-gnu/libp11-kit.so.0.3.0
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+{
+   OpenSSL/libp11-0.4.11
+   drd:MutexErr
+   fun:pthread_mutex_destroy
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+{
+   OpenSSL/libp11-0.4.11
+   Helgrind:Misc
+   obj:/usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so
+   ...
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+{
+   cURL/OpenSSL/libp11-0.4.11
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:CRYPTO_zalloc
+   fun:EC_KEY_METHOD_new
+   obj:*
+   obj:*
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:ENGINE_ctrl_cmd_string
+   fun:ENGINE_by_id
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:CONF_modules_load
+   fun:CONF_modules_load_file
+   obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.6.0
+   obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.6.0
+   fun:HTTPAPI_Init
+   fun:HTTPAPIEX_Init
+   ...
+}
+{
+   cURL/OpenSSL/libp11-0.4.11
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:RSA_meth_dup
+   obj:*
+   obj:*
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:ENGINE_ctrl_cmd_string
+   fun:ENGINE_by_id
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:CONF_modules_load
+   fun:CONF_modules_load_file
+   obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.6.0
+   obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.6.0
+   fun:HTTPAPI_Init
+   fun:HTTPAPIEX_Init
+   ...
+}
+{
+   OpenSSL/libp11-0.4.11
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:CRYPTO_zalloc
+   fun:EVP_PKEY_meth_new
+   obj:*
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:ENGINE_remove
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:OPENSSL_sk_pop_free
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:OPENSSL_cleanup
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+{
+   cURL/OpenSSL/libp11-0.4.11
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:CRYPTO_zalloc
+   fun:EVP_PKEY_meth_new
+   obj:*
+   fun:ENGINE_get_pkey_meth
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   ...
+   fun:curl_multi_perform
+   fun:curl_easy_perform
+   fun:HTTPAPI_ExecuteRequest
+   fun:HTTPAPIEX_ExecuteRequest
+   ...
+}
+{
+   OpenSSL Engine Test - cURL/OpenSSL/libp11-0.4.11
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:CRYPTO_zalloc
+   fun:ENGINE_new
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:__pthread_once_slow
+   fun:CRYPTO_THREAD_run_once
+   fun:OPENSSL_init_crypto
+   obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.6.0
+   obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.6.0
+   fun:HTTPAPI_Init
+   fun:HTTPAPIEX_Init
+   fun:platform_init
+   fun:IoTHub_Init
+   fun:TestSuiteInitialize
+   fun:RunTests
+   fun:main
+}
+{
+   OpenSSL Engine Test - cURL/OpenSSL/libp11-0.4.11
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:CRYPTO_zalloc
+   fun:ENGINE_new
+   fun:ENGINE_by_id
+   fun:ENGINE_by_id
+   obj:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+   fun:CONF_modules_load
+   fun:CONF_modules_load_file
+   obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.6.0
+   obj:/usr/lib/x86_64-linux-gnu/libcurl.so.4.6.0
+   fun:HTTPAPI_Init
+   fun:HTTPAPIEX_Init
+   fun:platform_init
+   fun:IoTHub_Init
+   fun:TestSuiteInitialize
+   fun:RunTests
+   fun:main
+}
