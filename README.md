@@ -3,21 +3,21 @@
 
 RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azure IoT device client, ...
 
-- [1. Azure-IoT-SDK](#1-azure-iot-sdk)
+- [1. 🎯 Azure-IoT-SDK](#1--azure-iot-sdk)
   - [1.1. 3rd party SDKs](#11-3rd-party-sdks)
-- [2. Getting started](#2-getting-started)
-  - [2.1. Download SDK library](#21-download-sdk-library)
+- [2. 🎓 Getting started](#2--getting-started)
+  - [2.1. 📚 Download SDK library](#21--download-sdk-library)
     - [2.1.1. Download azure-iot-sdk-c library](#211-download-azure-iot-sdk-c-library)
     - [2.1.2. Download mbedtls library](#212-download-mbedtls-library)
     - [2.1.3. Building mbedtls library](#213-building-mbedtls-library)
-  - [2.2. Build a sample](#22-build-a-sample)
+  - [2.2. 🗂 Build a sample](#22--build-a-sample)
     - [2.2.1. Modify CMakeLists.txt](#221-modify-cmakeliststxt)
     - [2.2.2. Set your board network information and select application](#222-set-your-board-network-information-and-select-application)
     - [2.2.3. Set the key information](#223-set-the-key-information)
-  - [2.3. Build project](#23-build-project)
+  - [2.3. ⏳ Build project](#23--build-project)
     - [2.3.1. Build command](#231-build-command)
     - [2.3.2. Example command log](#232-example-command-log)
-  - [2.4. Sample result](#24-sample-result)
+  - [2.4. 📝 Sample result](#24--sample-result)
     - [2.4.1. 📬 "iothub_ll_telemetry_sample" application result](#241--iothub_ll_telemetry_sample-application-result)
     - [2.4.2. 📩 "iothub_ll_c2d_sample" application result](#242--iothub_ll_c2d_sample-application-result)
     - [2.4.3. 🔐 "iothub_ll_client_x509_sample" application result](#243--iothub_ll_client_x509_sample-application-result)
@@ -25,7 +25,7 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
 
 ------
 
-# 1. Azure-IoT-SDK
+# 1. 🎯 Azure-IoT-SDK
 
 App|Description
 ---|---
@@ -37,12 +37,12 @@ App|Description
 - [WIZnet ioLibrary](https://github.com/Wiznet/ioLibrary_Driver)
   - for CMake users => https://github.com/Wiznet/RP2040-HAT-C/tree/main/libraries/ioLibrary_Driver
 
-# 2. Getting started
+# 2. 🎓 Getting started
 
 See [Getting Started with the Raspberry Pi Pico](https://rptl.io/pico-get-started) and the README in the [pico-sdk](https://github.com/raspberrypi/pico-sdk) for information
 on getting up and running.
 
-## 2.1. Download SDK library 
+## 2.1. 📚 Download SDK library 
 
 ### 2.1.1. Download azure-iot-sdk-c library
 This repo get the local copy version for this project.
@@ -83,7 +83,7 @@ In the following mbedtls source file, find the line similar to this and replace 
   int version;  /**< The X.509 version. (1=v1, 2=v2, 3=v3) */
 ```
 
-## 2.2. Build a sample
+## 2.2. 🗂 Build a sample
 
 ### 2.2.1. Modify CMakeLists.txt
 In the following "CMakeLists.txt" file, find the line similar to this and replace it as your environment:
@@ -164,7 +164,7 @@ const char pico_az_PRIVATE_KEY[] =
 "-----END PRIVATE KEY-----";
 ```
 
-## 2.3. Build project
+## 2.3. ⏳ Build project
 
 ### 2.3.1. Build command
 Run the following CMake commands from the root of the repository:
@@ -286,7 +286,7 @@ $ cp main.uf2 /f/
 
 ```
 
-## 2.4. Sample result
+## 2.4. 📝 Sample result
 ### 2.4.1. 📬 "iothub_ll_telemetry_sample" application result
 
 📑 [Let's see this doc for iothub_ll_telemetry_sample application](_1_APP_TELEMETRY_manual.md)
