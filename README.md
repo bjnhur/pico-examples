@@ -11,17 +11,18 @@ RP2040 W5100 W5500 network examples - Azure cloud functions, Azure IoT SDK, Azur
     - [2.1.2. Download mbedtls library](#212-download-mbedtls-library)
     - [2.1.3. Building mbedtls library](#213-building-mbedtls-library)
   - [2.2. 🗂 Build a sample](#22--build-a-sample)
-    - [2.2.1. Modify CMakeLists.txt](#221-modify-cmakeliststxt)
-    - [2.2.2. Set your board network information and select application](#222-set-your-board-network-information-and-select-application)
-    - [2.2.3. Set the key information](#223-set-the-key-information)
+    - [2.2.1. Make "port" directory for Azure IoT SDK, mbedtls](#221-make-port-directory-for-azure-iot-sdk-mbedtls)
+    - [2.2.2. Modify CMakeLists.txt](#222-modify-cmakeliststxt)
+    - [2.2.3. Set your board network information and select application](#223-set-your-board-network-information-and-select-application)
+    - [2.2.4. Set the key information](#224-set-the-key-information)
   - [2.3. ⏳ Build project](#23--build-project)
     - [2.3.1. Build command](#231-build-command)
     - [2.3.2. Example command log](#232-example-command-log)
-  - [2.4. 📝 Sample result](#24--sample-result)
+  - [2.4. 📝 Sample application results](#24--sample-application-results)
     - [2.4.1. 📬 "iothub_ll_telemetry_sample" application result](#241--iothub_ll_telemetry_sample-application-result)
     - [2.4.2. 📩 "iothub_ll_c2d_sample" application result](#242--iothub_ll_c2d_sample-application-result)
     - [2.4.3. 🔐 "iothub_ll_client_x509_sample" application result](#243--iothub_ll_client_x509_sample-application-result)
-    - [2.4.3. 🚢 "prov_dev_client_ll_sample" application result](#243--prov_dev_client_ll_sample-application-result)
+    - [2.4.4. 🚢 "prov_dev_client_ll_sample" application result](#244--prov_dev_client_ll_sample-application-result)
 
 ------
 
@@ -51,9 +52,7 @@ If you need, you can get this version from releae section in the git repo
 - Recent release : https://github.com/Azure/azure-iot-sdk-c/releases/tag/LTS_07_2021_Ref01
 - Azure IoT C SDK 1.4.1 - https://github.com/Azure/azure-iot-sdk-c/releases/tag/1.4.1
 
-📑 For details, Please read [_0_install_Azure_IoT_SDK.md](_0_install_Azure_IoT_SDK.md)
-
-For Pico W5100S platform, we need to make port codes, please check out the [Microsoft Azure SDK porting guide document](https://github.com/Azure/azure-c-shared-utility/blob/master/devdoc/porting_guide.md). From this porting guide, make `pico-azure-iot-sdk-c\port` directory.
+- 📑 For details, Please read [_0_install_Azure_IoT_SDK.md](_0_install_Azure_IoT_SDK.md)
 
 ### 2.1.2. Download mbedtls library
 This repo get the local copy version for this project.
@@ -85,7 +84,12 @@ In the following mbedtls source file, find the line similar to this and replace 
 
 ## 2.2. 🗂 Build a sample
 
-### 2.2.1. Modify CMakeLists.txt
+### 2.2.1. Make "port" directory for Azure IoT SDK, mbedtls
+For Pico W5100S platform, we need to make port codes, please check out the [Microsoft Azure SDK porting guide document](https://github.com/Azure/azure-c-shared-utility/blob/master/devdoc/porting_guide.md). 
+
+From upper porting guide, the repo has a example `pico-azure-iot-sdk-c\port` directory for this sample applications.
+
+### 2.2.2. Modify CMakeLists.txt
 In the following "CMakeLists.txt" file, find the line similar to this and replace it as your environment:
 
 > pico-azure-iot-sdk-c/CMakeLists.txt
@@ -111,7 +115,7 @@ if(NOT DEFINED WIZNET_DIR)
 endif()
 ```
 
-### 2.2.2. Set your board network information and select application
+### 2.2.3. Set your board network information and select application
 
 In the following main source file, find the line similar to this and replace it as follows:
 
@@ -139,7 +143,7 @@ static wiz_NetInfo g_net_info =
 
 ```
 
-### 2.2.3. Set the key information
+### 2.2.4. Set the key information
 
 Edit the "sample_certs.c" file entering the proper connection string and key value from the Azure Portal:
 
@@ -286,7 +290,7 @@ $ cp main.uf2 /f/
 
 ```
 
-## 2.4. 📝 Sample result
+## 2.4. 📝 Sample application results
 ### 2.4.1. 📬 "iothub_ll_telemetry_sample" application result
 
 📑 [Let's see this doc for iothub_ll_telemetry_sample application](_1_APP_TELEMETRY_manual.md)
@@ -299,6 +303,6 @@ $ cp main.uf2 /f/
 
 📑 [Let's see this doc for iothub_ll_client_x509_sample application](_3_APP_CLIENT_X509_manual.md)
 
-### 2.4.3. 🚢 "prov_dev_client_ll_sample" application result
+### 2.4.4. 🚢 "prov_dev_client_ll_sample" application result
 
 📑 [Let's see this doc for prov_dev_client_ll_sample application](_4_APP_PROV_X509_manual.md)
