@@ -90,9 +90,8 @@ For Pico W5100S platform, we need to make port codes, please check out the [Micr
 From upper porting guide, the repo has a example `pico-azure-iot-sdk-c\port` directory for this sample applications.
 
 ### 2.2.2. Modify CMakeLists.txt
-In the following "CMakeLists.txt" file, find the line similar to this and replace it as your environment:
+In the following [`pico-azure-iot-sdk-c/CMakeLists.txt`](pico-azure-iot-sdk-c/CMakeLists.txt) file, find the line similar to this and replace it as your environment:
 
-> pico-azure-iot-sdk-c/CMakeLists.txt
 ```bash
 
 if(NOT DEFINED MBEDTLS_LIB_DIR)
@@ -117,9 +116,7 @@ endif()
 
 ### 2.2.3. Set your board network information and select application
 
-In the following main source file, find the line similar to this and replace it as follows:
-
-> [`pico-azure-iot-sdk-c/application/main.c`](pico-examples/blob/main/pico-azure-iot-sdk-c/application/main.c)
+In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-c/application/main.c) source file, find the line similar to this and replace it as you want:
 
 ```C
 (...)
@@ -137,7 +134,7 @@ In the following main source file, find the line similar to this and replace it 
 #define _DHCP
 ```
 
-If you use static IP address, edit [`pico-azure-iot-sdk-c/port/src/netif.c`](pico-examples/blob/main/pico-azure-iot-sdk-c/port/src/netif.c) as below:
+If you select static IP address mode, edit [`pico-azure-iot-sdk-c/port/src/netif.c`](pico-azure-iot-sdk-c/port/src/netif.c) as below:
 
 ```C
 (...)
@@ -156,7 +153,7 @@ static wiz_NetInfo g_net_info =
 
 ### 2.2.4. Set the key information
 
-Edit the [`pico-azure-iot-sdk-c/application/sample_certs.c`](pico-examples/blob/main/pico-azure-iot-sdk-c/application/sample_certs.c)  entering the proper connection string and key value from the Azure Portal:
+Edit the [`pico-azure-iot-sdk-c/application/sample_certs.c`](pico-azure-iot-sdk-c/application/sample_certs.c)  entering the proper connection string and key value from the Azure Portal:
 
 ```C
 /* Paste in the your iothub connection string  */
