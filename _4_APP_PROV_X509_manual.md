@@ -6,7 +6,7 @@
   - [1.2. Azure portal](#12-azure-portal)
     - [1.2.1. Create Azure Device Provisioning service](#121-create-azure-device-provisioning-service)
     - [1.2.2. Link to Azure IoT Hub & DPS](#122-link-to-azure-iot-hub--dps)
-    - [1.2.3. Add device enrollment](#123-add-device-enrollment)
+    - [1.2.3. Create a device enrollment](#123-create-a-device-enrollment)
   - [1.3. Developer PC - SDK setting](#13-developer-pc---sdk-setting)
   - [1.4. Developer PC - Build](#14-developer-pc---build)
   - [1.5. Developer PC - Serial terminal open](#15-developer-pc---serial-terminal-open)
@@ -88,7 +88,7 @@ Connect DPS and IoT Hub service
 
 ![image](https://user-images.githubusercontent.com/6334864/137447405-663588df-ba63-4951-8cac-7fbdd78bfd91.png)
 
-### 1.2.3. Add device enrollment
+### 1.2.3. Create a device enrollment
 
 Add individual enrollment
 
@@ -102,7 +102,12 @@ Check "Individual Enrollments" list
 
 ![image](https://user-images.githubusercontent.com/6334864/137453392-3e411a30-2c64-4cbb-bc95-2748c88efb30.png)
 
-For more details, please read [Quickstart: Provision an X.509 certificate simulated device](https://docs.microsoft.com/en-us/azure/iot-dps/quick-create-simulated-device-x509?tabs=windows&pivots=programming-language-ansi-c) document as well.
+For more details, 
+
+- please refer [How to manage device enrollments with Azure portal](https://docs.microsoft.com/en-us/azure/iot-dps/how-to-manage-enrollments)
+
+- OR please read [Quickstart: Provision an X.509 certificate simulated device](https://docs.microsoft.com/en-us/azure/iot-dps/quick-create-simulated-device-x509?tabs=windows&pivots=programming-language-ansi-c) document as well.
+
 
 ## 1.3. Developer PC - SDK setting
 
