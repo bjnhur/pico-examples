@@ -169,12 +169,14 @@ Open "COM" port to see debug code
 ## 2.2. Azure IoT Explorer (preview) log
 
 Click "Refresh" until you find a provision device name
+
 ![image](https://user-images.githubusercontent.com/6334864/137456667-6ec35c58-5eda-4ee6-b5f1-ffbff394847b.png)
 
 - After few seconds, you can find provison device from device list as belew:
   ![image](https://user-images.githubusercontent.com/6334864/137456757-dd48cdc4-aa4c-4f60-82b5-3a6b891d9b49.png)
 
-Go to "Telemetry" menu, click "Start", and wait for incoming messages.
+Go to "Telemetry" menu, click "Start", and wait for incoming messages
+
 ![image](https://user-images.githubusercontent.com/6334864/137456837-69c489e4-b3c0-43bc-be56-1394e8413cc6.png)
 
 ## 2.3. Serial terminal log
