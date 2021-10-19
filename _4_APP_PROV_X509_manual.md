@@ -4,8 +4,9 @@
 - [1. Prepare IoT Hub and Device for this example](#1-prepare-iot-hub-and-device-for-this-example)
   - [1.1. Developer PC - Generate Device self-signed certificates](#11-developer-pc---generate-device-self-signed-certificates)
   - [1.2. Azure portal](#12-azure-portal)
-    - [1.2.1. Link to IoT Hub & DPS](#121-link-to-iot-hub--dps)
-    - [1.2.2. Device enrollment](#122-device-enrollment)
+    - [1.2.1. Create Azure Device Provisioning service](#121-create-azure-device-provisioning-service)
+    - [1.2.2. Link to Azure IoT Hub & DPS](#122-link-to-azure-iot-hub--dps)
+    - [1.2.3. Add device enrollment](#123-add-device-enrollment)
   - [1.3. Developer PC - SDK setting](#13-developer-pc---sdk-setting)
   - [1.4. Developer PC - Build](#14-developer-pc---build)
   - [1.5. Developer PC - Serial terminal open](#15-developer-pc---serial-terminal-open)
@@ -76,17 +77,18 @@ $
 ```
 
 ## 1.2. Azure portal 
+### 1.2.1. Create Azure Device Provisioning service
 
 **[MUST]** For Device Provisioning service creation, please follow up the 
 [Quickstart: Set up the IoT Hub Device Provisioning Service with the Azure portal](https://docs.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision) document first.
 
-### 1.2.1. Link to IoT Hub & DPS
+### 1.2.2. Link to Azure IoT Hub & DPS
 
 Connect DPS and IoT Hub service
 
 ![image](https://user-images.githubusercontent.com/6334864/137447405-663588df-ba63-4951-8cac-7fbdd78bfd91.png)
 
-### 1.2.2. Device enrollment
+### 1.2.3. Add device enrollment
 
 Add individual enrollment
 
