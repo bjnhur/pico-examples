@@ -119,7 +119,7 @@ endif()
 
 In the following main source file, find the line similar to this and replace it as follows:
 
-> pico-azure-iot-sdk-c/application/main.c
+> [`pico-azure-iot-sdk-c/application/main.c`](pico-examples/blob/main/pico-azure-iot-sdk-c/application/main.c)
 
 ```C
 (...)
@@ -133,21 +133,30 @@ In the following main source file, find the line similar to this and replace it 
 
 (...)
 
+// The application you wish to use DHCP mode should be uncommented
+#define _DHCP
+```
+
+If you use static IP address, edit [`pico-azure-iot-sdk-c/port/src/netif.c`](pico-examples/blob/main/pico-azure-iot-sdk-c/port/src/netif.c) as below:
+
+```C
+(...)
+
 static wiz_NetInfo g_net_info =
     {
         .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x11}, // MAC address
-        .ip = {192, 168, 3, 111},                     // IP address
+        .ip = {192, 168, 3, 111},                    // IP address
         .sn = {255, 255, 255, 0},                    // Subnet Mask
-        .gw = {192, 168, 3, 1},                     // Gateway
+        .gw = {192, 168, 3, 1},                      // Gateway
         .dns = {8, 8, 8, 8},                         // DNS server
+        // .dhcp = NETINFO_DHCP                      // DHCP enable/disable
+        .dhcp = NETINFO_STATIC
 
 ```
 
 ### 2.2.4. Set the key information
 
-Edit the "sample_certs.c" file entering the proper connection string and key value from the Azure Portal:
-
-> pico-azure-iot-sdk-c/application/sample_certs.c
+Edit the [`pico-azure-iot-sdk-c/application/sample_certs.c`](pico-examples/blob/main/pico-azure-iot-sdk-c/application/sample_certs.c)  entering the proper connection string and key value from the Azure Portal:
 
 ```C
 /* Paste in the your iothub connection string  */
