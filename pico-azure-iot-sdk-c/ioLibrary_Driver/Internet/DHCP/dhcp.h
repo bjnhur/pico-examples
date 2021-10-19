@@ -92,6 +92,9 @@ enum
  */
 void DHCP_init(uint8_t s, uint8_t * buf);
 
+/* 1 - expired timeout, need to re request */
+int8_t DHCP_check_leasetime(void);
+
 /*
  * @brief DHCP 1s Tick Timer handler
  * @note SHOULD BE register to your system 1s Tick timer handler 
@@ -103,10 +106,8 @@ void DHCP_time_handler(void);
  * @param ip_assign   - callback func when IP is assigned from DHCP server first
  * @param ip_update   - callback func when IP is changed
  * @param ip_conflict - callback func when the assigned IP is conflict with others.
- * @param expire_lease_time - callback func when lease time expire.
  */
-//void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void));
-void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void), void(*expire_lease_time)(void));
+void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void));
 
 /*
  * @brief DHCP client in the main loop

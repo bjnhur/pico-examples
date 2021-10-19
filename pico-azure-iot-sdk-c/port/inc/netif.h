@@ -13,3 +13,4 @@ time_t wizchip_sntp_get_current_timestamp();
 
 int8_t wizchip_network_initialize(bool bDHCP);
 void wizchip_dhcp_time_handler(void);
+void wizchip_dhcp_check_leasetime(void);

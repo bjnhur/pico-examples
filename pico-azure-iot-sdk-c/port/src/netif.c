@@ -47,7 +47,6 @@ static void print_network_information(void);
 static void wizchip_dhcp_init(void);
 static void wizchip_dhcp_assign(void);
 static void wizchip_dhcp_conflict(void);
-static void wizchip_expire_dhcp(void);
 
 uint8_t wizchip_gethostbyname(const char* host, uint8_t* ip)
 {
@@ -82,8 +81,7 @@ uint8_t wizchip_gethostbyname(const char* host, uint8_t* ip)
 static void wizchip_dhcp_init(void)
 {
     DHCP_init(SOCKET_DNS, g_ethernet_buf);
-    //reg_dhcp_cbfunc(wizchip_dhcp_assign, wizchip_dhcp_assign, wizchip_dhcp_conflict);
-    reg_dhcp_cbfunc(wizchip_dhcp_assign, wizchip_dhcp_assign, wizchip_dhcp_conflict, wizchip_expire_dhcp);
+    reg_dhcp_cbfunc(wizchip_dhcp_assign, wizchip_dhcp_assign, wizchip_dhcp_conflict);
 }
 
 static int wizchip_dhcp_run(void)
@@ -149,10 +147,13 @@ static void wizchip_dhcp_conflict(void)
         ; // this example is halt.
 }
 
-static void wizchip_expire_dhcp(void)
+void wizchip_dhcp_check_leasetime(void)
 {
-    printf(" Expired IP lease time\n");
-    wizchip_dhcp_run();
+    if (DHCP_check_leasetime()==1)
+    {
+        printf(" Expired IP lease time\n");
+        wizchip_dhcp_run();
+    }
 }
 
 void wizchip_dhcp_time_handler(void)

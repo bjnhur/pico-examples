@@ -20,7 +20,7 @@
 
 // The application you wish to use should be uncommented
 //
-//#define APP_TELEMETRY
+#define APP_TELEMETRY
 //#define APP_C2D
 //#define APP_CLI_X509
 //#define APP_PROV_X509
@@ -39,6 +39,7 @@ const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 
 /* Critical section */
 static critical_section_t g_wizchip_cri_sec;
+static critical_section_t g_wizchip_dhcp_sec;
 
 /* Timer */
 static struct repeating_timer g_timer;
@@ -106,6 +107,7 @@ int main()
     // Make the CS pin available to picotool
     bi_decl(bi_1pin_with_name(PIN_CS, "W5x00 CHIP SELECT"));
     critical_section_init(&g_wizchip_cri_sec);
+    critical_section_init(&g_wizchip_dhcp_sec);
 
     wizchip_reset();
     wizchip_initialize();
@@ -151,6 +153,9 @@ int main()
     /* Infinite loop */
     for( ;; )
     {
+#ifdef _DHCP
+        wizchip_dhcp_check_leasetime();
+#endif
         gpio_put(LED_PIN, 0);
         sleep_ms(1000); // wait for 1sec
         gpio_put(LED_PIN, 1);
@@ -250,9 +255,12 @@ static void wizchip_check(void)
 static bool repeating_timer_callback(struct repeating_timer *t)
 {
     //printf("Repeat at %lld\n", time_us_64());
+    critical_section_enter_blocking(&g_wizchip_dhcp_sec);
     g_sec_cnt++;
 #ifdef _DHCP
     wizchip_dhcp_time_handler();
 #endif
+    critical_section_exit(&g_wizchip_dhcp_sec);
+
     return true;
 }

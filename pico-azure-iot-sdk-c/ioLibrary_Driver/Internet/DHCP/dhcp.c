@@ -50,14 +50,13 @@
 //
 //*****************************************************************************
 
-#include <stdio.h>
 #include "socket.h"
 #include "dhcp.h"
 
 /* If you want to display debug & processing message, Define _DHCP_DEBUG_ in dhcp.h */
-
+//#define _DHCP_DEBUG_
 #ifdef _DHCP_DEBUG_
-   #include <stdio.h>
+//   #include <stdio.h>
 #endif   
 
 /* DHCP state machine. */
@@ -223,13 +222,11 @@ uint8_t DHCP_CHADDR[6]; // DHCP Client MAC address.
 void default_ip_assign(void);
 void default_ip_update(void);
 void default_ip_conflict(void);
-static void default_expire_lease_time(void);
 
 /* Callback handler */
 void (*dhcp_ip_assign)(void)   = default_ip_assign;     /* handler to be called when the IP address from DHCP server is first assigned */
 void (*dhcp_ip_update)(void)   = default_ip_update;     /* handler to be called when the IP address from DHCP server is updated */
 void (*dhcp_ip_conflict)(void) = default_ip_conflict;   /* handler to be called when the IP address from DHCP server is conflict */
-void (*dhcp_expire_lease_time)(void) = default_expire_lease_time;   /* handler to be called when the IP address from DHCP server is conflict */
 
 
 //void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void));
@@ -284,23 +281,15 @@ void default_ip_conflict(void)
 	setSHAR(DHCP_CHADDR);
 }
 
-/* The default handler of ip changed */
-static void default_expire_lease_time(void)
-{
-	;
-}
-
 /* register the call back func. */
-void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void), void(*expire_lease_time)(void))
+void reg_dhcp_cbfunc(void(*ip_assign)(void), void(*ip_update)(void), void(*ip_conflict)(void))
 {
    dhcp_ip_assign   = default_ip_assign;
    dhcp_ip_update   = default_ip_update;
    dhcp_ip_conflict = default_ip_conflict;
-   dhcp_expire_lease_time = default_expire_lease_time;
    if(ip_assign)   dhcp_ip_assign = ip_assign;
    if(ip_update)   dhcp_ip_update = ip_update;
    if(ip_conflict) dhcp_ip_conflict = ip_conflict;
-   if(expire_lease_time) dhcp_expire_lease_time = expire_lease_time;
    
 }
 
@@ -802,11 +791,15 @@ uint8_t DHCP_run(void)
 				
 				DHCP_XID++;
 
-				send_DHCP_REQUEST();
-
+/*				send_DHCP_REQUEST();
 				reset_DHCP_timeout();
-
 				dhcp_state = STATE_DHCP_REREQUEST;
+*/
+
+//2021.10.19 force to move discover state. return value is DHCP_RUNNING
+				send_DHCP_DISCOVER();
+				dhcp_state = STATE_DHCP_DISCOVER;
+				ret = DHCP_RUNNING;
 			}
 		break;
 
@@ -990,19 +983,24 @@ void reset_DHCP_timeout(void)
 	dhcp_retry_count = 0;
 }
 
-void DHCP_time_handler(void)
+int8_t DHCP_check_leasetime(void)
 {
-	dhcp_tick_1s++;
 	switch ( dhcp_state ) {
 		case STATE_DHCP_LEASED :
-			printf("> Maintains the IP address %d %d\r\n", (dhcp_lease_time/2), dhcp_tick_1s);
-			if ((dhcp_lease_time != INFINITE_LEASETIME) && ((dhcp_lease_time/2) < dhcp_tick_1s)) {
 #ifdef _DHCP_DEBUG_
+			printf("> Maintains the IP address %d %d\r\n", (dhcp_lease_time/2), dhcp_tick_1s);
 #endif
-				dhcp_expire_lease_time();
+			if ((dhcp_lease_time != INFINITE_LEASETIME) && ((dhcp_lease_time/2) < dhcp_tick_1s)) {
+				return 1;
 			}
 		break;
 	}
+	return 0;
+}
+
+void DHCP_time_handler(void)
+{
+	dhcp_tick_1s++;
 }
 
 void getIPfromDHCP(uint8_t* ip)
