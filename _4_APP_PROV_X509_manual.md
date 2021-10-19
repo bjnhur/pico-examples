@@ -15,6 +15,7 @@
   - [2.3. Serial terminal log](#23-serial-terminal-log)
   - [2.4. Azure IoT Explorer (preview) log](#24-azure-iot-explorer-preview-log)
 
+---
 
 # 1. Prepare IoT Hub and Device for this example
 ## 1.1. Developer PC - Generate Device self-signed certificates
@@ -80,68 +81,115 @@ $
 [Quickstart: Set up the IoT Hub Device Provisioning Service with the Azure portal](https://docs.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision) document first.
 
 ### 1.2.1. Link to IoT Hub & DPS
+
+Connect DPS and IoT Hub service
+
 ![image](https://user-images.githubusercontent.com/6334864/137447405-663588df-ba63-4951-8cac-7fbdd78bfd91.png)
 
 ### 1.2.2. Device enrollment
+
+Add individual enrollment
+
 ![image](https://user-images.githubusercontent.com/6334864/137451545-a75c4293-3373-4414-9153-5b627c2f66c6.png)
 
 Use "prov_device1.pem" file generated in previous section
+
 ![image](https://user-images.githubusercontent.com/6334864/137453279-4053bf2e-e0a7-4665-84b0-3232ddc4f231.png)
+
+Check "Individual Enrollments" list
 
 ![image](https://user-images.githubusercontent.com/6334864/137453392-3e411a30-2c64-4cbb-bc95-2748c88efb30.png)
 
-- For more details, please read [Quickstart: Provision an X.509 certificate simulated device](https://docs.microsoft.com/en-us/azure/iot-dps/quick-create-simulated-device-x509?tabs=windows&pivots=programming-language-ansi-c) document as well.
+For more details, please read [Quickstart: Provision an X.509 certificate simulated device](https://docs.microsoft.com/en-us/azure/iot-dps/quick-create-simulated-device-x509?tabs=windows&pivots=programming-language-ansi-c) document as well.
 
 ## 1.3. Developer PC - SDK setting
 
 - Get the key value from files _(prov_device1.crt, prov_device1.key)_ as below:
 ![image](https://user-images.githubusercontent.com/6334864/137454913-db68fbd4-b9ae-4c6f-8dd7-8eef3327851b.png)
 
-- Edit sample_certs.c with generated certificates as upper. For Common name, Use "W5100S_EVB_PICO_PROV_X509" used in key generation.
-> ./pico-azure-iot-sdk-c/application/sample_certs.c
+- Edit [`/pico-azure-iot-sdk-c/application/sample_certs.c`](/pico-azure-iot-sdk-c/application/sample_certs.c) with generated certificates as upper. For Common name, Use "W5100S_EVB_PICO_PROV_X509" used in key generation.
 
 ![image](https://user-images.githubusercontent.com/6334864/137454964-aadef87a-e1f1-4835-ad9f-06eb0718b1f7.png)
 
 - Select example in main.c 
-> ./pico-azure-iot-sdk-c/application/main.c
 
-![image](https://user-images.githubusercontent.com/6334864/137453869-f4064913-638e-4dd3-9947-03fe26654e35.png)
+In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-c/application/main.c) source file, find the line similar to this and replace it as you want:
 
+```C
+(...)
+
+// The application you wish to use should be uncommented
+//
+//#define APP_TELEMETRY
+//#define APP_C2D
+//#define APP_CLI_X509
+#define APP_PROV
+
+(...)
+
+// The application you wish to use DHCP mode should be uncommented
+#define _DHCP
+static wiz_NetInfo g_net_info =
+    {
+        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x11}, // MAC address
+        .ip = {192, 168, 3, 111},                    // IP address
+        .sn = {255, 255, 255, 0},                    // Subnet Mask
+        .gw = {192, 168, 3, 1},                      // Gateway
+        .dns = {8, 8, 8, 8},                         // DNS server
+#ifdef _DHCP
+        .dhcp = NETINFO_DHCP                         // DHCP enable/disable
+#else
+        // this example uses static IP
+        .dhcp = NETINFO_STATIC
+#endif
+```
 
 ## 1.4. Developer PC - Build
+
+Run `make` command
 
 ![image](https://user-images.githubusercontent.com/6334864/137421861-ada5ee2d-c153-4d75-bfb2-b8641f4d4919.png)
 
 ## 1.5. Developer PC - Serial terminal open
+
+Open "COM" port to see debug code
+
 ![image](https://user-images.githubusercontent.com/6334864/137317966-b9f63168-e011-4a0a-a3b1-345d1e847304.png)
 
 
 # 2. Run the example code
 
 ## 2.1. copy main.uf2 file into your Pico board
+
 ![image](https://user-images.githubusercontent.com/6334864/137318763-14d23305-af22-45d1-ab43-4143b50b658c.png)
 
 ## 2.2. Azure IoT Explorer (preview) log
+
+Click "Refresh" until you find a provision device name
 ![image](https://user-images.githubusercontent.com/6334864/137456667-6ec35c58-5eda-4ee6-b5f1-ffbff394847b.png)
 
-After few seconds, you can find provison device from device list as belew:
-![image](https://user-images.githubusercontent.com/6334864/137456757-dd48cdc4-aa4c-4f60-82b5-3a6b891d9b49.png)
+- After few seconds, you can find provison device from device list as belew:
+  ![image](https://user-images.githubusercontent.com/6334864/137456757-dd48cdc4-aa4c-4f60-82b5-3a6b891d9b49.png)
 
-Move to telemetry menu, click start. Wait for event...
+Go to "Telemetry" menu, click "Start", and wait for incoming messages.
 ![image](https://user-images.githubusercontent.com/6334864/137456837-69c489e4-b3c0-43bc-be56-1394e8413cc6.png)
 
 ## 2.3. Serial terminal log
 
-Connect to DPS (Device Provisioning Server)
+Connect to Azure DPS (Device Provisioning Server)
+
 ![image](https://user-images.githubusercontent.com/6334864/137457261-1403a3d3-9c8f-4e5f-bce1-701580a34b8b.png)
 
-Provision work is done.
+Provision work is done
+
 ![image](https://user-images.githubusercontent.com/6334864/137457282-aeb84f7d-5b02-416f-ad12-bdf35c2c5913.png)
 
-Send 2 messages to IoT hub.
+Send 2 messages to Azure IoT hub
+
 ![image](https://user-images.githubusercontent.com/6334864/137458064-4fb10693-89b6-49fd-ba17-78e2fabff233.png)
 
 ## 2.4. Azure IoT Explorer (preview) log
 
 You can see 2 messages from device as below:
+
 ![image](https://user-images.githubusercontent.com/6334864/137457385-f0da06ae-541b-4431-a26c-5c3db5c9b37e.png)

@@ -36,6 +36,20 @@ const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 
 // The application you wish to use DHCP mode should be uncommented
 #define _DHCP
+static wiz_NetInfo g_net_info =
+    {
+        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x11}, // MAC address
+        .ip = {192, 168, 3, 111},                     // IP address
+        .sn = {255, 255, 255, 0},                    // Subnet Mask
+        .gw = {192, 168, 3, 1},                     // Gateway
+        .dns = {8, 8, 8, 8},                         // DNS server
+#ifdef _DHCP
+        .dhcp = NETINFO_DHCP                         // DHCP enable/disable
+#else
+        // this example uses static IP
+        .dhcp = NETINFO_STATIC
+#endif
+};
 
 /* Critical section */
 static critical_section_t g_wizchip_cri_sec;
@@ -116,10 +130,10 @@ int main()
     int8_t networkip_setting = 0;
 #ifdef _DHCP
     // this example uses DHCP
-    networkip_setting = wizchip_network_initialize(true);
+    networkip_setting = wizchip_network_initialize(true, &g_net_info);
 #else
     // this example uses static IP
-    networkip_setting = wizchip_network_initialize(false);
+    networkip_setting = wizchip_network_initialize(false, &g_net_info);
 #endif
 
     add_repeating_timer_ms(-1000, repeating_timer_callback, NULL, &g_timer);

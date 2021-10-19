@@ -24,6 +24,7 @@
 ## 1.2. Developer PC
 
 ### 1.2.1. SDK setting
+
 In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-c/application/main.c) source file, find the line similar to this and replace it as you want:
 
 ```C
@@ -40,6 +41,19 @@ In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-
 
 // The application you wish to use DHCP mode should be uncommented
 #define _DHCP
+static wiz_NetInfo g_net_info =
+    {
+        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x11}, // MAC address
+        .ip = {192, 168, 3, 111},                    // IP address
+        .sn = {255, 255, 255, 0},                    // Subnet Mask
+        .gw = {192, 168, 3, 1},                      // Gateway
+        .dns = {8, 8, 8, 8},                         // DNS server
+#ifdef _DHCP
+        .dhcp = NETINFO_DHCP                         // DHCP enable/disable
+#else
+        // this example uses static IP
+        .dhcp = NETINFO_STATIC
+#endif
 ```
 
 Edit the [`pico-azure-iot-sdk-c/application/sample_certs.c`](pico-azure-iot-sdk-c/application/sample_certs.c)  entering the proper connection string and key value from the Azure Portal:
@@ -63,7 +77,7 @@ Run `make` command
 
 ### 1.2.4. Serial terminal open
 
-- Open "COM" port to see debug code
+Open "COM" port to see debug code
 
 ![image](https://user-images.githubusercontent.com/6334864/137317966-b9f63168-e011-4a0a-a3b1-345d1e847304.png)
 

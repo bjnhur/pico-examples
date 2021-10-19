@@ -132,13 +132,6 @@ In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-
 
 // The application you wish to use DHCP mode should be uncommented
 #define _DHCP
-```
-
-If you select static IP address mode, edit [`pico-azure-iot-sdk-c/port/src/netif.c`](pico-azure-iot-sdk-c/port/src/netif.c) as below:
-
-```C
-(...)
-
 static wiz_NetInfo g_net_info =
     {
         .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x11}, // MAC address
@@ -146,8 +139,12 @@ static wiz_NetInfo g_net_info =
         .sn = {255, 255, 255, 0},                    // Subnet Mask
         .gw = {192, 168, 3, 1},                      // Gateway
         .dns = {8, 8, 8, 8},                         // DNS server
-        // .dhcp = NETINFO_DHCP                      // DHCP enable/disable
+#ifdef _DHCP
+        .dhcp = NETINFO_DHCP                         // DHCP enable/disable
+#else
+        // this example uses static IP
         .dhcp = NETINFO_STATIC
+#endif
 
 ```
 

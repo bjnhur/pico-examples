@@ -140,31 +140,83 @@ $
 - Get the key value from files _(device1.crt, device1.key)_ as below:
 ![image](https://user-images.githubusercontent.com/6334864/137420283-440321ad-6656-4cff-9153-a26188df6d2c.png)
 
-- Edit sample_certs.c with generated certificates as upper. Connection string for this example is "HostName=twarelabhub.azure-devices.net;DeviceId=W5100S_EVB_PICO_X509;x509=true"
-  
-> ./pico-azure-iot-sdk-c/application/sample_certs.c
+- Edit [`pico-azure-iot-sdk-c/application/sample_certs.c`](pico-azure-iot-sdk-c/application/sample_certs.c) with generated certificates as upper. Connection string for this example is `"HostName=twarelabhub.azure-devices.net;DeviceId=W5100S_EVB_PICO_X509;x509=true"`
+
 ![image](https://user-images.githubusercontent.com/6334864/137420358-922cca25-b3b8-4b73-9298-7423d5f4c28a.png)
 
 - Select example in main.c 
-> ./pico-azure-iot-sdk-c/application/main.c
-![image](https://user-images.githubusercontent.com/6334864/137421611-ddf540ee-e699-42c3-a229-9265088e73f5.png)
+
+In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-c/application/main.c) source file, find the line similar to this and replace it as you want:
+
+```C
+(...)
+
+// The application you wish to use should be uncommented
+//
+//#define APP_TELEMETRY
+//#define APP_C2D
+#define APP_CLI_X509
+//#define APP_PROV
+
+(...)
+
+// The application you wish to use DHCP mode should be uncommented
+#define _DHCP
+static wiz_NetInfo g_net_info =
+    {
+        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x11}, // MAC address
+        .ip = {192, 168, 3, 111},                    // IP address
+        .sn = {255, 255, 255, 0},                    // Subnet Mask
+        .gw = {192, 168, 3, 1},                      // Gateway
+        .dns = {8, 8, 8, 8},                         // DNS server
+#ifdef _DHCP
+        .dhcp = NETINFO_DHCP                         // DHCP enable/disable
+#else
+        // this example uses static IP
+        .dhcp = NETINFO_STATIC
+#endif
+```
 
 ## 1.3. Developer PC - Build
+
+Run `make` command
 
 ![image](https://user-images.githubusercontent.com/6334864/137421861-ada5ee2d-c153-4d75-bfb2-b8641f4d4919.png)
 
 ## 1.4. Developer PC - Serial terminal open
+
+Open "COM" port to see debug code
+
 ![image](https://user-images.githubusercontent.com/6334864/137317966-b9f63168-e011-4a0a-a3b1-345d1e847304.png)
 
 ## 1.5. Azure portal 
+
+Add device in your Azure IoT Hub
+
 ![image](https://user-images.githubusercontent.com/6334864/137417701-28ded168-7bdd-4e9c-a89d-d4cc7304440c.png)
+
+Create a device with `X.509 Self-Signed`
+- Copy fingerprint string as desribed [1.1. Developer PC - Generate Device self-signed certificates](#11-developer-pc---generate-device-self-signed-certificates)
+
 ![image](https://user-images.githubusercontent.com/6334864/137418264-3ec14375-a3ea-40f4-9dc6-8292e2966a76.png)
+
+Check the device in the "device list"
+
 ![image](https://user-images.githubusercontent.com/6334864/137418465-485410ed-6c9f-4744-853a-ed42818c2772.png)
 ![image](https://user-images.githubusercontent.com/6334864/137418475-4b487e14-15b7-4bb8-913c-ab9009eaf6a3.png)
 
 ## 1.6. Developer PC - Azure IoT Explorer (preview) setting
+
+Click the device name created in the previous section
+
 ![image](https://user-images.githubusercontent.com/6334864/137422040-1f15781b-69a3-4c23-a92e-adfc452acd01.png)
+
+Go to "Telemetry" menu and click "Start"
+
 ![image](https://user-images.githubusercontent.com/6334864/137422225-4d735152-e220-4801-918e-12532ef9fd4a.png)
+
+Wait for incoming messages
+
 ![image](https://user-images.githubusercontent.com/6334864/137422316-7b5916d3-1851-4344-9776-b6ce193e0089.png)
 
 # 2. Run the example code
@@ -173,8 +225,17 @@ $
 ![image](https://user-images.githubusercontent.com/6334864/137318763-14d23305-af22-45d1-ab43-4143b50b658c.png)
 
 ## 2.2. Serial terminal log
+
+Connect to Azure IoT Hub and start to verify the device with X.509 authentication
+
 ![image](https://user-images.githubusercontent.com/6334864/137422831-f77bee77-d372-44d4-ac81-8b798710be28.png)
+
+Send messages to Azure IoT Hub
+
 ![image](https://user-images.githubusercontent.com/6334864/137422966-984ffb83-e579-44e0-911e-7f45572afec8.png)
 
 ## 2.3. Azure IoT Explorer (preview) log
+
+You can see the incoming messages from your IoT device
+
 ![image](https://user-images.githubusercontent.com/6334864/137423061-fbb80b7f-9d27-49a9-bff2-b1377ac3ac39.png)
