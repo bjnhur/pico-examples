@@ -107,6 +107,7 @@ For more details, please read [Quickstart: Provision an X.509 certificate simula
 ## 1.3. Developer PC - SDK setting
 
 - Get the key value from files _(prov_device1.crt, prov_device1.key)_ as below:
+
 ![image](https://user-images.githubusercontent.com/6334864/137454913-db68fbd4-b9ae-4c6f-8dd7-8eef3327851b.png)
 
 - Edit [`/pico-azure-iot-sdk-c/application/sample_certs.c`](/pico-azure-iot-sdk-c/application/sample_certs.c) with generated certificates as upper. For Common name, Use "W5100S_EVB_PICO_PROV_X509" used in key generation.
