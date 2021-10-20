@@ -35,7 +35,7 @@ In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-
 //#define APP_TELEMETRY
 #define APP_C2D
 //#define APP_CLI_X509
-//#define APP_PROV
+//#define APP_PROV_X509
 
 (...)
 

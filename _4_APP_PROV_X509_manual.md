@@ -82,6 +82,10 @@ $
 **[MUST]** For Device Provisioning service creation, please follow up the 
 [Quickstart: Set up the IoT Hub Device Provisioning Service with the Azure portal](https://docs.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision) document first.
 
+- After creating DPS, get your "ID Scope" value
+
+  ![image](https://user-images.githubusercontent.com/6334864/138015435-b4467ede-7a44-43e0-bc74-684fb7ae4975.png)
+
 ### 1.2.2. Link to Azure IoT Hub & DPS
 
 Connect DPS and IoT Hub service
@@ -116,10 +120,12 @@ For more details,
 ![image](https://user-images.githubusercontent.com/6334864/137454913-db68fbd4-b9ae-4c6f-8dd7-8eef3327851b.png)
 
 - Edit [`/pico-azure-iot-sdk-c/application/sample_certs.c`](/pico-azure-iot-sdk-c/application/sample_certs.c) with generated certificates as upper. For Common name, Use "W5100S_EVB_PICO_PROV_X509" used in key generation.
+  - `pico_az_CERTIFICATE` and `pico_az_PRIVATE_KEY` use key value from files _(prov_device1.crt, prov_device1.key)_
+  - `pico_az_id_scope` use "ID Scope" string from [1.2.1. Create Azure Device Provisioning service](#121-create-azure-device-provisioning-service)
+  - `pico_az_COMMON_NAME` use "device ID" from [1.1. Developer PC - Generate Device self-signed certificates](#11-developer-pc---generate-device-self-signed-certificates)
 
-![image](https://user-images.githubusercontent.com/6334864/137454964-aadef87a-e1f1-4835-ad9f-06eb0718b1f7.png)
+![image](https://user-images.githubusercontent.com/6334864/138015946-9d3887ed-b0e7-4094-b27e-e82dca6e7621.png)
 
-- Select example in main.c 
 
 In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-c/application/main.c) source file, find the line similar to this and replace it as you want:
 
@@ -131,7 +137,7 @@ In the following [`pico-azure-iot-sdk-c/application/main.c`](pico-azure-iot-sdk-
 //#define APP_TELEMETRY
 //#define APP_C2D
 //#define APP_CLI_X509
-#define APP_PROV
+#define APP_PROV_X509
 
 (...)
 
