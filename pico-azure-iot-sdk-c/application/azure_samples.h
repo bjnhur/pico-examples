@@ -14,6 +14,7 @@ extern "C"
     extern const char pico_az_COMMON_NAME[];
     extern const char pico_az_CERTIFICATE[];
     extern const char pico_az_PRIVATE_KEY[];
+    extern const char pico_az_id_scope[];
 
     void iothub_ll_telemetry_sample(void);
     void iothub_ll_c2d_sample(void);

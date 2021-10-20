@@ -51,10 +51,6 @@ and removing calls to _DoWork will yield the same results. */
     #include "iothubtransporthttp.h"
 #endif // SAMPLE_HTTP
 
-#ifdef MBED_BUILD_TIMESTAMP
-    #define SET_TRUSTED_CERT_IN_SAMPLES
-#endif // MBED_BUILD_TIMESTAMP
-
 #ifdef SET_TRUSTED_CERT_IN_SAMPLES
 #include "certs.h"
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
@@ -205,12 +201,12 @@ void iothub_ll_c2d_sample(void)
         IoTHubDeviceClient_LL_SetOption(device_ll_handle, OPTION_TRUSTED_CERT, certificates);
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
 
-#if defined SAMPLE_MQTT || defined SAMPLE_MQTT_WS
+#if defined SAMPLE_MQTT || defined SAMPLE_MQTT_OVER_WEBSOCKETS
         //Setting the auto URL Encoder (recommended for MQTT). Please use this option unless
         //you are URL Encoding inputs yourself.
         //ONLY valid for use with MQTT
-        //bool urlEncodeOn = true;
-        //IoTHubDeviceClient_LL_SetOption(iothub_ll_handle, OPTION_AUTO_URL_ENCODE_DECODE, &urlEncodeOn);
+        bool urlEncodeOn = true;
+        IoTHubDeviceClient_LL_SetOption(iothub_ll_handle, OPTION_AUTO_URL_ENCODE_DECODE, &urlEncodeOn);
 #endif
 
 #ifdef SAMPLE_HTTP

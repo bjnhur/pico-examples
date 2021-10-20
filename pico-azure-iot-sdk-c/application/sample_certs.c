@@ -13,6 +13,8 @@ const char pico_az_x509privatekey[] =
 "-----BEGIN PRIVATE KEY-----""\n"
 "-----END PRIVATE KEY-----";
 
+const char pico_az_id_scope[] = "[ID Scope]";
+
 const char pico_az_COMMON_NAME[] = "[custom-hsm-device]";
 
 const char pico_az_CERTIFICATE[] = 

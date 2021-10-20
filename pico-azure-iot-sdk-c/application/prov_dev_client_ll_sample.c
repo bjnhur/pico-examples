@@ -61,9 +61,6 @@ and removing calls to _DoWork will yield the same results. */
 
 // This sample is to demostrate iothub reconnection with provisioning and should not
 // be confused as production code
-#ifdef MBED_BUILD_TIMESTAMP
-    #define SET_TRUSTED_CERT_IN_SAMPLES
-#endif // MBED_BUILD_TIMESTAMP
 
 #ifdef SET_TRUSTED_CERT_IN_SAMPLES
 #include "certs.h"
@@ -73,7 +70,8 @@ MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(PROV_DEVICE_RESULT, PROV_DEVICE_RESULT_VA
 MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(PROV_DEVICE_REG_STATUS, PROV_DEVICE_REG_STATUS_VALUES);
 
 static const char* global_prov_uri = "global.azure-devices-provisioning.net";
-static const char* id_scope = "0ne003EA7EE";
+//static const char* id_scope = "[ID Scope]";
+static const char* id_scope = pico_az_id_scope;
 
 static bool g_use_proxy = false;
 static const char* PROXY_ADDRESS = "127.0.0.1";
