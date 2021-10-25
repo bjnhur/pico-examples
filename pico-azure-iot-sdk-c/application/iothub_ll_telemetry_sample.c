@@ -50,6 +50,7 @@ and removing calls to _DoWork will yield the same results. */
     #include "iothubtransporthttp.h"
 #endif // SAMPLE_HTTP
 
+#define SET_TRUSTED_CERT_IN_SAMPLES
 #ifdef SET_TRUSTED_CERT_IN_SAMPLES
 #include "certs.h"
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
@@ -142,6 +143,7 @@ void iothub_ll_telemetry_sample(void)
 #ifdef SET_TRUSTED_CERT_IN_SAMPLES
         // Setting the Trusted Certificate. This is only necessary on systems without
         // built in certificate stores.
+// (void)printf("IoTHubDeviceClient_LL_SetOption, %s\r\n", certificates);
         IoTHubDeviceClient_LL_SetOption(device_ll_handle, OPTION_TRUSTED_CERT, certificates);
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
 

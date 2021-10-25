@@ -13,7 +13,7 @@
 #include "mbedtls/entropy.h"
 #include "mbedtls/ctr_drbg.h"
 #include "mbedtls/error.h"
-// #include "mbedtls/certs.h"
+#include "mbedtls/certs.h"
 #include "mbedtls/entropy.h"
 #include "mbedtls/pk.h"
 
@@ -502,11 +502,11 @@ printf("==== mbedtls_init ====\n");
         mbedtls_ssl_config_init(&tls_io_instance->config);
         mbedtls_ssl_config_defaults(&tls_io_instance->config, MBEDTLS_SSL_IS_CLIENT, MBEDTLS_SSL_TRANSPORT_STREAM, MBEDTLS_SSL_PRESET_DEFAULT);
         mbedtls_ssl_conf_rng(&tls_io_instance->config, mbedtls_ctr_drbg_random, &tls_io_instance->ctr_drbg);
-        
-        //mbedtls_ssl_conf_authmode(&tls_io_instance->config, MBEDTLS_SSL_VERIFY_REQUIRED);
-        mbedtls_ssl_conf_authmode( &tls_io_instance->config, MBEDTLS_SSL_VERIFY_OPTIONAL );
+
+        mbedtls_ssl_conf_authmode(&tls_io_instance->config, MBEDTLS_SSL_VERIFY_REQUIRED);
+        //mbedtls_ssl_conf_authmode( &tls_io_instance->config, MBEDTLS_SSL_VERIFY_OPTIONAL );
         // mbedtls_ssl_conf_authmode( &tls_io_instance->config, MBEDTLS_SSL_VERIFY_NONE );
-        // mbedtls_ssl_conf_ca_chain( &tls_io_instance->config, &tls_io_instance->trusted_certificates_parsed, NULL );
+        mbedtls_ssl_conf_ca_chain( &tls_io_instance->config, &tls_io_instance->trusted_certificates_parsed, NULL );
         
         mbedtls_ssl_conf_min_version(&tls_io_instance->config, MBEDTLS_SSL_MAJOR_VERSION_3, MBEDTLS_SSL_MINOR_VERSION_3); // v1.2
 
@@ -955,18 +955,32 @@ int tlsio_mbedtls_setoption(CONCRETE_IO_HANDLE tls_io, const char *optionName, c
             else
             {
 printf("=== mbedtls_x509_crt_parse ===\n");
+char* dbg_value = (unsigned char *)value;
+int dbg_value_len = (int)(strlen(value) + 1);
+printf("==== DEBUG ==== - %c %c %c %c %c len(%d)\n", dbg_value[0], dbg_value[1], dbg_value[2], dbg_value[3], dbg_value[4], dbg_value_len);
+for (int i=0; i<20; i++) printf("%c", dbg_value[i]);
+printf("\n");
+for (int i=4100; i<4185; i++) printf("%c", dbg_value[i]);
+printf("\n==== DEBUG ==== end \n");
+
+//                int parse_result = mbedtls_x509_crt_parse(&tls_io_instance->trusted_certificates_parsed, (const unsigned char *)value, (int)(strlen(value) + 1));
                 int parse_result = mbedtls_x509_crt_parse(&tls_io_instance->trusted_certificates_parsed, (const unsigned char *)value, (int)(strlen(value) + 1));
-                if (parse_result != 0)
-                {
+                if (parse_result < 0) {
                     LogInfo("Malformed pem certificate");
                     free(tls_io_instance->trusted_certificates);
                     tls_io_instance->trusted_certificates = NULL;
                     result = MU_FAILURE;
+                    return result;
                 }
-                else
-                {
+                if (parse_result > 0) {
+                    /* This will happen if the CA chain contains one or more invalid certs, going ahead as the hadshake
+                    * may still succeed if the other certificates in the CA chain are enough for the authentication */
+                    LogInfo("mbedtls_x509_crt_parse was partly successful. No. of failed certificates: %d", parse_result);
+                }
+                // else
+                // {
                     mbedtls_ssl_conf_ca_chain(&tls_io_instance->config, &tls_io_instance->trusted_certificates_parsed, NULL);
-                }
+                // }
             }
         }
         else if (strcmp(SU_OPTION_X509_CERT, optionName) == 0 || strcmp(OPTION_X509_ECC_CERT, optionName) == 0)

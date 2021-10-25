@@ -1,4 +1,5 @@
 add_library(AzureSDK STATIC
+"src/certs.c"
 "src/agenttime.c"
 "src/platform.c"
 "src/netif.c"
