@@ -1,5 +1,5 @@
 add_library(AzureSDK STATIC
-"src/certs.c"
+#"src/certs.c"
 "src/agenttime.c"
 "src/platform.c"
 "src/netif.c"
@@ -129,7 +129,7 @@ add_definitions(-DDONT_USE_UPLOADTOBLOB)
 add_definitions(-DUSE_PROV_MODULE)
 #add_definitions(-DHSM_TYPE_SYMM_KEY)
 add_definitions(-DHSM_TYPE_X509)
-
+add_definitions(-DUSE_AZURE_CLOUD_RSA_CERT)
 #add_definitions(-DUSE_BALTIMORE_CERT)
 #add_definitions(-DUSE_MICROSOFTAZURE_DE_CERT)
 #add_definitions(-DUSE_PORTAL_AZURE_CN_CERT)

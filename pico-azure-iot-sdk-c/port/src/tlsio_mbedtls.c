@@ -13,7 +13,7 @@
 #include "mbedtls/entropy.h"
 #include "mbedtls/ctr_drbg.h"
 #include "mbedtls/error.h"
-#include "mbedtls/certs.h"
+// #include "mbedtls/certs.h"
 #include "mbedtls/entropy.h"
 #include "mbedtls/pk.h"
 
@@ -981,7 +981,9 @@ printf("\n==== DEBUG ==== end \n");
                 // {
                     mbedtls_ssl_conf_ca_chain(&tls_io_instance->config, &tls_io_instance->trusted_certificates_parsed, NULL);
                 // }
+// while(1) {;}
             }
+
         }
         else if (strcmp(SU_OPTION_X509_CERT, optionName) == 0 || strcmp(OPTION_X509_ECC_CERT, optionName) == 0)
         {
