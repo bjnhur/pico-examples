@@ -95,7 +95,7 @@ add_library(AzureSDK STATIC
 "${AZURE_SDK_DIR}/provisioning_client/deps/utpm/src/Marshal.c"
 "${AZURE_SDK_DIR}/provisioning_client/deps/utpm/src/tpm_comm_emulator.c"
 "${AZURE_SDK_DIR}/provisioning_client/deps/utpm/src/Memory.c"
-"src/tpm_socket_comm.c"
+#"src/tpm_socket_comm.c"
 #"${AZURE_SDK_DIR}/provisioning_client/deps/utpm/src/tpm_socket_comm.c"
 )
 
@@ -124,7 +124,7 @@ target_include_directories(AzureSDK PUBLIC
 )
 
 add_definitions(-DUSE_MQTT)
-add_definitions(-DUSE_HTTP)
+#add_definitions(-DUSE_HTTP)
 add_definitions(-DDONT_USE_UPLOADTOBLOB)
 add_definitions(-DUSE_PROV_MODULE)
 #add_definitions(-DHSM_TYPE_SYMM_KEY)
