@@ -1,5 +1,10 @@
-// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) WIZnet. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+// CAVEAT: This sample is to demonstrate azure IoT client concepts only and is not a guide design principles or style
+// Checking of return codes and error values shall be omitted for brevity.  Please practice sound engineering practices
+// when writing production code.
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -21,6 +26,7 @@ static wiz_NetInfo* g_net_info;
 /* Retry count */
 #define DHCP_RETRY_COUNT 5
 #define SOCKET_DNS 3
+#define SOCKET_DHCP 2
 
 //static uint32_t current_timestamp;
 #define SNTP_SERVER_ADDRESS "pool.ntp.org"
@@ -150,7 +156,7 @@ time_t wizchip_sntp_get_current_timestamp(void)
 // < 0 fail
 static void wizchip_dhcp_init(void)
 {
-    DHCP_init(SOCKET_DNS, g_ethernet_buf);
+    DHCP_init(SOCKET_DHCP, g_ethernet_buf);
     reg_dhcp_cbfunc(wizchip_dhcp_cb_assign, wizchip_dhcp_cb_assign, wizchip_dhcp_cb_conflict);
 }
 

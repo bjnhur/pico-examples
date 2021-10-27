@@ -25,6 +25,11 @@ typedef struct
 } TCPSocketConnection;
 
 #define MAX_SOCK_NUM 2
+// socket assgin
+// 0, 1 - application, 2 channel avail
+// 2 - DHCP
+// 3 - DNS, SNTP
+
 static TCPSocketConnection socketconnection[MAX_SOCK_NUM];
 static uint16_t avail_local_port = 5555;
 
@@ -62,6 +67,7 @@ void tcpsocketconnection_destroy(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionH
 void tcpsocketconnection_set_blocking(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHandle, bool blocking, unsigned int timeout)
 {
   printf("=== tcpsocketconnection_set_blocking ===\r\n");
+  // need to complete later  
 /*
   TCPSocketConnection *psock = (TCPSocketConnection *)(tcpSocketConnectionHandle);
   int32_t option_timeout = 0;
