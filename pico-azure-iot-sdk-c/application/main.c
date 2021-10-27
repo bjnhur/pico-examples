@@ -18,7 +18,6 @@
 
 #include "azure_samples.h"
 
-#define SET_TRUSTED_CERT_IN_SAMPLES
 // The application you wish to use should be uncommented
 //
 //#define APP_TELEMETRY
