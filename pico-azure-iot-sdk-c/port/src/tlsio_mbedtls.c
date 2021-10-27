@@ -465,7 +465,6 @@ static void my_debug( void *ctx, int level,
                       const char *str )
 {
     ((void) level);
-
     // mbedtls_fprintf( (FILE *) ctx, "%s:%04d: %s", file, line, str );
     // fflush(  (FILE *) ctx  );
     printf("%s:%04d: %s", file, line, str );
@@ -476,8 +475,6 @@ static void mbedtls_init(TLS_IO_INSTANCE *tls_io_instance)
     const char* pers = "azure_iot_client";
     if (tls_io_instance->tls_status != TLS_STATE_INITIALIZED)
     {
-printf("==== mbedtls_init ====\n");
-
 #if defined(MBEDTLS_DEBUG_C)
     mbedtls_debug_set_threshold( DEBUG_LEVEL );
 #endif
@@ -531,8 +528,6 @@ CONCRETE_IO_HANDLE tlsio_mbedtls_create(void *io_create_parameters)
 {
     TLSIO_CONFIG *tls_io_config = (TLSIO_CONFIG *)io_create_parameters;
     TLS_IO_INSTANCE *result;
-
-printf("==== tlsio_mbedtls_create ====\n");
 
     if (tls_io_config == NULL)
     {
@@ -954,16 +949,6 @@ int tlsio_mbedtls_setoption(CONCRETE_IO_HANDLE tls_io, const char *optionName, c
             }
             else
             {
-printf("=== mbedtls_x509_crt_parse ===\n");
-char* dbg_value = (unsigned char *)value;
-int dbg_value_len = (int)(strlen(value) + 1);
-printf("==== DEBUG ==== - %c %c %c %c %c len(%d)\n", dbg_value[0], dbg_value[1], dbg_value[2], dbg_value[3], dbg_value[4], dbg_value_len);
-for (int i=0; i<20; i++) printf("%c", dbg_value[i]);
-printf("\n");
-for (int i=4100; i<4185; i++) printf("%c", dbg_value[i]);
-printf("\n==== DEBUG ==== end \n");
-
-//                int parse_result = mbedtls_x509_crt_parse(&tls_io_instance->trusted_certificates_parsed, (const unsigned char *)value, (int)(strlen(value) + 1));
                 int parse_result = mbedtls_x509_crt_parse(&tls_io_instance->trusted_certificates_parsed, (const unsigned char *)value, (int)(strlen(value) + 1));
                 if (parse_result < 0) {
                     LogInfo("Malformed pem certificate");
@@ -981,13 +966,11 @@ printf("\n==== DEBUG ==== end \n");
                 // {
                     mbedtls_ssl_conf_ca_chain(&tls_io_instance->config, &tls_io_instance->trusted_certificates_parsed, NULL);
                 // }
-// while(1) {;}
             }
 
         }
         else if (strcmp(SU_OPTION_X509_CERT, optionName) == 0 || strcmp(OPTION_X509_ECC_CERT, optionName) == 0)
         {
-printf("=== mbedtls_x509_crt_parse SU_OPTION_X509_CERT ===\n");
             char* temp_cert;
             if (mallocAndStrcpy_s(&temp_cert, (const char *)value) != 0)
             {

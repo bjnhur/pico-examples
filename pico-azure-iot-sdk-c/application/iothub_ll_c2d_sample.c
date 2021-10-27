@@ -154,7 +154,7 @@ void iothub_ll_c2d_sample(void)
     float telemetry_temperature;
     float telemetry_humidity;
     const char* telemetry_scale = "Celsius";
-    const char* telemetry_msg = "test_message";
+    // const char* telemetry_msg = "test_message";
     char telemetry_msg_buffer[80];    
 
     // Select the Protocol to use with the connection

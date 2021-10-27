@@ -155,14 +155,14 @@ static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HAND
 void iothub_ll_client_x509_sample(void)
 {
     IOTHUB_CLIENT_TRANSPORT_PROVIDER protocol;
-    size_t messages_count = 0;    
+    //size_t messages_count = 0;    
     IOTHUB_MESSAGE_HANDLE message_handle;
     size_t messages_sent = 0;
 
     float telemetry_temperature;
     float telemetry_humidity;
     const char* telemetry_scale = "Celsius";
-    const char* telemetry_msg = "test_message";
+    //const char* telemetry_msg = "test_message";
     char telemetry_msg_buffer[80];    
 
     // Select the Protocol to use with the connection

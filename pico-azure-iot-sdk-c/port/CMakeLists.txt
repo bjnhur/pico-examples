@@ -6,6 +6,7 @@ add_library(AzureSDK STATIC
 "src/netutil.c"
 "src/tcpsocketconnection_c.c"
 "src/socketio_mbed.c"
+#"${AZURE_SDK_DIR}/c-utility/adapters/socketio_mbed.c"
 "src/tlsio_mbedtls.c"
 "src/lock.c"
 "src/threadapi_nonos.c"
