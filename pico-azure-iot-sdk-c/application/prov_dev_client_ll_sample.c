@@ -61,8 +61,6 @@ and removing calls to _DoWork will yield the same results. */
 
 // This sample is to demostrate iothub reconnection with provisioning and should not
 // be confused as production code
-#define SET_TRUSTED_CERT_IN_SAMPLES
-
 #ifdef SET_TRUSTED_CERT_IN_SAMPLES
 #include "certs.h"
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
