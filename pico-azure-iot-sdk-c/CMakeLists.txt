@@ -72,6 +72,8 @@ add_subdirectory(${WIZNET_DIR})
 set(ENABLE_PROGRAMS OFF CACHE BOOL "Build mbedtls programs")
 set(ENABLE_TESTING OFF CACHE BOOL "Build mbedtls testing")
 add_definitions(-DMBEDTLS_CONFIG_FILE="${PORT_DIR}/inc/mbedtls_config.h")
+add_definitions(-DSET_TRUSTED_CERT_IN_SAMPLES)
+
 add_subdirectory(${MBEDTLS_LIB_DIR})
 add_subdirectory(${PORT_DIR})
 

@@ -20,10 +20,10 @@
 
 // The application you wish to use should be uncommented
 //
-//#define APP_TELEMETRY
+#define APP_TELEMETRY
 //#define APP_C2D
 //#define APP_CLI_X509
-#define APP_PROV_X509
+//#define APP_PROV_X509
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 /* SPI */
